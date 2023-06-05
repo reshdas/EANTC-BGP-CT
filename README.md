@@ -1,4 +1,4 @@
-# EANTC-2023-BGP-CT
+# EANTC-2023-BGP-CT-INTEROP
 
 This repository contains the configuration for BGP-CT Interop done in EANTC-2023 between Juniper and FreeRTR.
 
