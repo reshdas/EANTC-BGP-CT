@@ -8,4 +8,4 @@ https://www.youtube.com/watch?v=Y5MQN_W0qpE
 You can find the EANTC 2023 test report and topology information:
 
 https://eantc.de/fileadmin/eantc/downloads/events/2023/EANTC-InteropTest2023-TestReport.pdf
-
+(Page 36)
