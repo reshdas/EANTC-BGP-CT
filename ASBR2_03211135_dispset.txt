@@ -1,0 +1,425 @@
+set version 22.4R1.11-EVO
+set system host-name Juniper-42-PTX10001-36MR-2
+set system root-authentication encrypted-password "$6$Q1cQPt7e$4npwOfAbnswZmMZjHU8aPHA.m4b.ZcYgn2Rk2NxFbjhFJsHNZzEFRxm1FvBVNCkzCpD.Ddwom0o08GgiWrAOs0"
+set system login user aelita uid 2000
+set system login user aelita class super-user
+set system login user aelita authentication encrypted-password "$6$KA0Z8Gm3$rx1uswh9.Q.GjnYG.YevOeRxvuChStaWACeC6RWKpVQ8wD65KZ95MOXARJWn.FBqwIMqvZdsT06bfBhshDKS0."
+set system login user kszarkowicz uid 2001
+set system login user kszarkowicz class super-user
+set system login user kszarkowicz authentication encrypted-password "$6$DFRnkO1D$9VONDuzgbo731f87LseajyFydTOFjvv4DKUaPfgXrfQbxDb5rLYEGQEd84MYA6v34aygwzsec/Q69bHUE.WYz1"
+set system services ssh root-login allow
+set system services extension-service request-response grpc clear-text port 32767
+set system services extension-service request-response grpc max-connections 30
+set system services extension-service request-response grpc routing-instance mgmt_junos
+set system management-instance
+set system name-server 192.168.100.100
+set system name-server 192.168.160.100
+set system syslog file interactive-commands interactive-commands any
+set system syslog file messages any notice
+set system syslog file messages authorization info
+set system processes nlsd enable
+set system ntp server 192.168.100.132
+set chassis auto-image-upgrade
+set services monitoring twamp server light
+set interfaces et-0/0/0 description "JNPR: ACX7100-48L 38"
+set interfaces et-0/0/0 speed 100g
+set interfaces et-0/0/0 unit 0 family inet address 20.38.42.42/24
+set interfaces et-0/0/0 unit 0 family mpls maximum-labels 16
+set interfaces et-0/0/2 description "JNPR: MX204 34"
+set interfaces et-0/0/2 speed 100g
+set interfaces et-0/0/2 unit 0 family inet address 20.34.42.42/24
+set interfaces et-0/0/2 unit 0 family mpls maximum-labels 16
+set interfaces et-0/1/10:0 number-of-sub-ports 4
+set interfaces et-0/1/10:0 speed 100g
+set interfaces lo0 unit 0 family inet address 100.0.0.42/32
+set interfaces lo0 unit 0 family iso address 49.0001.0000.0000.0042.00
+set interfaces re0:mgmt-0 unit 0 family inet address 192.168.20.42/23
+set interfaces et-0/0/8 description "RARE: 137-1"
+set interfaces et-0/0/8 speed 40g
+set interfaces et-0/0/8 unit 0 family inet address 20.42.137.42/24
+set interfaces et-0/0/8 unit 0 family mpls maximum-labels 16
+set interfaces et-0/2/11:0 description "Arista: 71"
+set interfaces et-0/2/11:0 unit 0 family inet address 20.42.71.42/24
+set interfaces et-0/2/11:0 unit 0 family iso
+set interfaces et-0/2/11:0 unit 0 family inet6
+set interfaces et-0/2/11:0 unit 0 family mpls maximum-labels 16
+set interfaces et-0/2/11:3 description "IXIA: 23"
+set interfaces et-0/2/11:3 flexible-vlan-tagging
+set interfaces et-0/2/11:3 unit 16 description "Ixia: vlan 10 ISIS"
+set interfaces et-0/2/11:3 unit 16 vlan-id 16
+set interfaces et-0/2/11:3 unit 16 family inet address 50.10.42.1/24
+set interfaces et-0/2/11:3 unit 16 family inet6 address 2600:50:10:42::1/64
+set interfaces et-0/2/11:3 unit 11 description "Ixia: OSPF vlan 11"
+set interfaces et-0/2/11:3 unit 11 vlan-id 60
+set interfaces et-0/2/11:3 unit 11 family inet address 60.1.42.1/24
+set interfaces et-0/2/11:3 unit 11 family inet6 address 2600:60:1:42::1/64
+set interfaces et-0/2/11:3 unit 12 description "Ixia: vlan 12 plain IP OSPF"
+set interfaces et-0/2/11:3 unit 12 vlan-id 2
+set interfaces et-0/2/11:3 unit 12 family inet address 60.0.42.1/24
+set interfaces et-0/2/11:3 unit 12 family inet6 address 2600:60:0:42::1/64
+set interfaces et-0/2/11:3 unit 1 vlan-id 1
+set interfaces et-0/2/11:3 unit 1 family inet address 60.10.42.1/24
+set interfaces et-0/2/11:3 unit 1 family inet6 address 2600:60:10:42::1/64
+set interfaces et-0/2/11:3 unit 61 vlan-id 61
+set interfaces et-0/2/11:3 unit 61 family inet address 60.128.42.1/24
+set interfaces et-0/2/11:3 unit 61 family inet6 address 2600:60:128:42::1/64
+set interfaces et-0/2/11:3 unit 62 vlan-id 62
+set interfaces et-0/2/11:3 unit 62 family inet address 60.129.42.1/24
+set interfaces et-0/2/11:3 unit 62 family inet6 address 2600:60:129:42::1/64
+set interfaces et-0/2/11:3 unit 51 description "ixia: Flex-Algo 128"
+set interfaces et-0/2/11:3 unit 51 vlan-id 51
+set interfaces et-0/2/11:3 unit 51 family inet address 51.10.42.1/24
+set interfaces et-0/2/11:3 unit 52 description "ixia: Flex-Algo 129"
+set interfaces et-0/2/11:3 unit 52 vlan-id 52
+set interfaces et-0/2/11:3 unit 52 family inet address 52.10.42.1/24
+set interfaces et-0/2/11:3 unit 53 description "ixia: Flex-Algo 130"
+set interfaces et-0/2/11:3 unit 53 vlan-id 53
+set interfaces et-0/2/11:3 unit 53 family inet address 53.10.42.1/24
+set interfaces et-0/2/11:3 unit 70 description "Ixia: 23"
+set interfaces et-0/2/11:3 unit 70 vlan-id 700
+set interfaces et-0/2/11:3 unit 70 family inet address 70.0.42.42/24
+set interfaces et-0/2/11:3 unit 70 family mpls maximum-labels 16
+set interfaces et-0/2/11:3 unit 71 description "Ixia: 23"
+set interfaces et-0/2/11:3 unit 71 vlan-id 701
+set interfaces et-0/2/11:3 unit 71 family inet address 71.0.42.42/24
+set interfaces et-0/2/11:3 unit 71 family mpls maximum-labels 16
+set interfaces et-0/2/11:3 unit 72 description "Ixia: 23"
+set interfaces et-0/2/11:3 unit 72 vlan-id 702
+set interfaces et-0/2/11:3 unit 72 family inet address 72.0.42.42/24
+set interfaces et-0/2/11:3 unit 72 family mpls maximum-labels 16
+set interfaces et-0/2/11 number-of-sub-ports 4
+set interfaces et-0/2/11 speed 10g
+set interfaces et-0/1/3:2 description "Nokia: 91"
+set interfaces et-0/1/3:2 unit 0 family inet address 20.42.91.42/24
+set interfaces et-0/1/3:2 unit 0 family mpls maximum-labels 16
+set interfaces et-0/1/3 number-of-sub-ports 4
+set interfaces et-0/1/3 speed 10g
+set interfaces et-0/0/10 description "RARE: 137-2"
+set interfaces et-0/0/10 speed 40g
+set interfaces et-0/0/10 unit 0 family inet address 21.42.137.42/24
+set interfaces et-0/0/10 unit 0 family mpls maximum-labels 16
+set interfaces et-0/1/9:0 description "Cisco: 150"
+set interfaces et-0/1/9:0 unit 0 family inet address 20.42.150.42/24
+set interfaces et-0/1/9:0 unit 0 family iso
+set interfaces et-0/1/9:0 unit 0 family mpls maximum-labels 16
+set interfaces et-0/1/9 number-of-sub-ports 4
+set interfaces et-0/1/9 speed 10g
+set interfaces et-0/1/8 description "Ciena: 110"
+set interfaces et-0/1/8 speed 400g
+set interfaces et-0/1/8 optics-options wavelength 1567.13
+set interfaces et-0/1/8 optics-options laser-enable
+set interfaces et-0/1/10 description "Cisco: 400G"
+set interfaces et-0/1/10 speed 400g
+set interfaces et-0/1/10 optics-options wavelength 1567.13
+set interfaces et-0/1/10 optics-options laser-enable
+set interfaces et-0/1/10 unit 0 family inet address 22.42.158.42/24
+set interfaces et-0/1/10 unit 0 family mpls maximum-labels 16
+set interfaces et-0/2/8 description spirent
+set interfaces et-0/2/8 unit 0 family inet address 172.16.1.1/24
+set policy-options policy-statement bgp-isis-export term A1 from route-filter 51.10.42.0/24 exact
+set policy-options policy-statement bgp-isis-export term A1 then community add color-128
+set policy-options policy-statement bgp-isis-export term A1 then accept
+set policy-options policy-statement bgp-isis-export term A2 from route-filter 52.10.42.0/24 exact
+set policy-options policy-statement bgp-isis-export term A2 then community add color-129
+set policy-options policy-statement bgp-isis-export term A2 then accept
+set policy-options policy-statement bgp-isis-export term A3 from route-filter 53.10.42.0/24 exact
+set policy-options policy-statement bgp-isis-export term A3 then community add color-130
+set policy-options policy-statement bgp-isis-export term A3 then accept
+set policy-options policy-statement bgp-isis-export term SR-TE1 from route-filter 70.0.42.0/24 exact
+set policy-options policy-statement bgp-isis-export term SR-TE1 then community add color-100
+set policy-options policy-statement bgp-isis-export term SR-TE1 then accept
+set policy-options policy-statement bgp-isis-export term SR-TE2 from route-filter 71.0.42.0/24 exact
+set policy-options policy-statement bgp-isis-export term SR-TE2 then community add color-100
+set policy-options policy-statement bgp-isis-export term SR-TE2 then accept
+set policy-options policy-statement bgp-isis-export term SR-TE3 from route-filter 72.0.42.0/24 exact
+set policy-options policy-statement bgp-isis-export term SR-TE3 then community add color-101
+set policy-options policy-statement bgp-isis-export term SR-TE3 then accept
+set policy-options policy-statement bgp-isis-export term A from family inet-vpn
+set policy-options policy-statement bgp-isis-export term A then accept
+set policy-options policy-statement bgp-isis-export term B from family inet6-vpn
+set policy-options policy-statement bgp-isis-export term B then accept
+set policy-options policy-statement bgp-isis-export term C from route-filter 60.10.0.0/16 prefix-length-range /24-/24
+set policy-options policy-statement bgp-isis-export term C then accept
+set policy-options policy-statement bgp-isis-export term D from route-filter 2600:60:10:42::/64 exact
+set policy-options policy-statement bgp-isis-export term D then accept
+set policy-options policy-statement bgp-ospf-export term ospf-fa-128 from community target-128
+set policy-options policy-statement bgp-ospf-export term ospf-fa-128 then community add color-128
+set policy-options policy-statement bgp-ospf-export term ospf-fa-128 then accept
+set policy-options policy-statement bgp-ospf-export term ospf-fa-129 from community target-129
+set policy-options policy-statement bgp-ospf-export term ospf-fa-129 then community add color-129
+set policy-options policy-statement bgp-ospf-export term A from family inet-vpn
+set policy-options policy-statement bgp-ospf-export term A then accept
+set policy-options policy-statement bgp-ospf-export term B from family inet6-vpn
+set policy-options policy-statement bgp-ospf-export term B then accept
+set policy-options policy-statement bgp-ospf-export term C from route-filter 60.0.0.0/16 prefix-length-range /24-/24
+set policy-options policy-statement bgp-ospf-export term C then accept
+set policy-options policy-statement bgp-ospf-export term D from route-filter 2600:60:0:42::/64 exact
+set policy-options policy-statement bgp-ospf-export term D then accept
+set policy-options policy-statement node-sid term A from route-filter 100.0.0.42/32 exact
+set policy-options policy-statement node-sid term A then prefix-segment algorithm 128 index 270
+set policy-options policy-statement node-sid term A then prefix-segment algorithm 128 node-segment
+set policy-options policy-statement node-sid term A then prefix-segment algorithm 129 index 271
+set policy-options policy-statement node-sid term A then prefix-segment algorithm 129 node-segment
+set policy-options policy-statement node-sid term A then prefix-segment algorithm 130 index 272
+set policy-options policy-statement node-sid term A then prefix-segment algorithm 130 node-segment
+set policy-options policy-statement node-sid term A then prefix-segment index 42
+set policy-options policy-statement node-sid term A then prefix-segment node-segment
+set policy-options policy-statement node-sid term A then accept
+set policy-options policy-statement MPATH-CBF from protocol spring-te
+set policy-options policy-statement MPATH-CBF from protocol l-isis
+set policy-options policy-statement MPATH-CBF from protocol bgp
+set policy-options policy-statement MPATH-CBF from protocol evpn
+set policy-options policy-statement MPATH-CBF then accept
+set policy-options policy-statement cbf from protocol bgp
+set policy-options policy-statement cbf from protocol spring-te
+set policy-options policy-statement cbf from protocol l-isis
+set policy-options policy-statement cbf then cos-next-hop-map cbf
+set policy-options policy-statement bgp-to-mpls term A from family traffic-engineering
+set policy-options policy-statement bgp-to-mpls term A from protocol bgp
+set policy-options policy-statement bgp-to-mpls term A then accept
+set policy-options policy-statement bgp-prefix-sid term A from route-filter 100.0.0.42/32 exact
+set policy-options policy-statement bgp-prefix-sid term A then prefix-segment index 42
+set policy-options policy-statement bgp-prefix-sid term A then accept
+set policy-options policy-statement bgp-prefix-sid term B from protocol bgp
+set policy-options policy-statement bgp-prefix-sid term B from route-filter 100.0.0.0/8 prefix-length-range /32-/32
+set policy-options policy-statement bgp-prefix-sid term B then prefix-segment redistribute
+set policy-options policy-statement bgp-prefix-sid term B then accept
+set policy-options policy-statement AS64512_CT term 1 from protocol bgp
+set policy-options policy-statement AS64512_CT term 1 from rib bgp.transport.3
+set policy-options policy-statement AS64512_CT term 1 then accept
+set policy-options policy-statement AS64512_CT term 2 from protocol bgp
+set policy-options policy-statement AS64512_CT term 2 from rib inet.3
+set policy-options policy-statement AS64512_CT term 2 then accept
+set policy-options policy-statement AS64512_CT term def then reject
+set policy-options community target-128 members target:6128:6128
+set policy-options community target-129 members target:6129:6129
+set policy-options community color-128 members color:0:128
+set policy-options community color-129 members color:0:129
+set policy-options community color-130 members color:0:130
+set policy-options community color-100 members color:0:100
+set policy-options community color-101 members color:0:101
+set class-of-service forwarding-policy next-hop-map cbf-map-red forwarding-class best-effort transport-class color 100
+set class-of-service forwarding-policy next-hop-map cbf-map-red forwarding-class expedited-forwarding transport-class color 101
+set class-of-service forwarding-policy next-hop-map cbf forwarding-class best-effort lsp-next-hop via-Arista
+set class-of-service forwarding-policy next-hop-map cbf forwarding-class expedited-forwarding lsp-next-hop via-Cisco
+set firewall family inet filter cbf term A from dscp be
+set firewall family inet filter cbf term A then count cbf-be
+set firewall family inet filter cbf term A then forwarding-class best-effort
+set firewall family inet filter cbf term A then accept
+set firewall family inet filter cbf term B from dscp ef
+set firewall family inet filter cbf term B then count cbf-ef
+set firewall family inet filter cbf term B then forwarding-class expedited-forwarding
+set firewall family inet filter cbf term B then accept
+set routing-instances isis instance-type vrf
+set routing-instances isis interface et-0/2/11:3.16
+set routing-instances isis interface et-0/2/11:3.51
+set routing-instances isis interface et-0/2/11:3.52
+set routing-instances isis interface et-0/2/11:3.53
+set routing-instances isis vrf-target target:5001:5001
+set routing-instances isis vrf-table-label
+set routing-instances ospf instance-type vrf
+set routing-instances ospf interface et-0/2/11:3.11
+set routing-instances ospf vrf-target target:6001:6001
+set routing-instances ospf vrf-table-label
+set routing-instances ospf-fa-128 instance-type vrf
+set routing-instances ospf-fa-128 interface et-0/2/11:3.61
+set routing-instances ospf-fa-128 interface et-0/2/8.0
+set routing-instances ospf-fa-128 vrf-target target:6128:6128
+set routing-instances ospf-fa-128 vrf-table-label
+set routing-instances ospf-fa-129 instance-type vrf
+set routing-instances ospf-fa-129 interface et-0/2/11:3.62
+set routing-instances ospf-fa-129 vrf-target target:6129:6129
+set routing-instances ospf-fa-129 vrf-table-label
+set routing-instances sr-te instance-type vrf
+set routing-instances sr-te interface et-0/2/11:3.71
+set routing-instances sr-te interface et-0/2/11:3.72
+set routing-instances sr-te vrf-target target:7001:7001
+set routing-instances sr-te vrf-table-label
+set routing-instances mgmt_junos routing-options static route 0.0.0.0/0 next-hop 192.168.20.1
+set routing-instances mgmt_junos description default
+set routing-options flex-algorithm 128 definition metric-type delay-metric
+set routing-options flex-algorithm 128 color 128
+set routing-options flex-algorithm 128 use-transport-class
+set routing-options flex-algorithm 129 definition metric-type igp-metric
+set routing-options flex-algorithm 129 definition admin-group exclude GREEN
+set routing-options flex-algorithm 129 color 129
+set routing-options flex-algorithm 129 use-transport-class
+set routing-options flex-algorithm 130 color 130
+set routing-options flex-algorithm 130 use-transport-class
+set routing-options route-distinguisher-id 100.0.0.42
+set routing-options rib inet.3
+set routing-options resolution preserve-nexthop-hierarchy
+set routing-options static route 0.0.0.0/0 next-hop 192.168.20.1
+set routing-options static route 127.0.0.0/8 receive
+set routing-options martians 127.0.0.0/8 orlonger allow
+set routing-options transport-class auto-create
+set routing-options transport-class name 128 color 128
+set routing-options transport-class name 128 fallback none
+set routing-options transport-class name 129 color 129
+set routing-options transport-class name 129 fallback none
+set routing-options transport-class name 130 color 130
+set routing-options transport-class name 130 fallback none
+set routing-options transport-class name 100 color 100
+set routing-options transport-class name 101 color 101
+set routing-options transport-class any-class color 102
+set routing-options forwarding-table chained-composite-next-hop ingress l3vpn
+set protocols bfd sbfd local-discriminator 42
+set protocols bgp group leaf local-address 100.0.0.42
+set protocols bgp group leaf family inet labeled-unicast
+set protocols bgp group leaf family inet-vpn unicast
+set protocols bgp group leaf family inet6 unicast
+set protocols bgp group leaf family inet6-vpn unicast
+set protocols bgp group leaf export bgp-ospf-export
+set protocols bgp group leaf peer-as 64512
+set protocols bgp group leaf local-as 64512
+set protocols bgp group leaf local-as loops 2
+set protocols bgp group leaf neighbor 100.0.0.38
+set protocols bgp group leaf vpn-apply-export
+set protocols bgp group leaf advertise-srgb
+set protocols bgp group leaf-isis local-address 100.0.0.42
+set protocols bgp group leaf-isis family inet unicast
+set protocols bgp group leaf-isis family inet-vpn unicast nexthop-resolution preserve-nexthop-hierarchy
+set protocols bgp group leaf-isis family inet6 unicast
+set protocols bgp group leaf-isis family inet6-vpn unicast
+set protocols bgp group leaf-isis export bgp-isis-export
+set protocols bgp group leaf-isis peer-as 64512
+set protocols bgp group leaf-isis local-as 64512
+set protocols bgp group leaf-isis local-as loops 2
+set protocols bgp group leaf-isis neighbor 100.0.0.71
+set protocols bgp group leaf-isis vpn-apply-export
+set protocols bgp group bgp-lu-prefix-sid family inet labeled-unicast
+set protocols bgp group bgp-lu-prefix-sid export bgp-prefix-sid
+set protocols bgp group bgp-lu-prefix-sid local-as 64514
+set protocols bgp group bgp-lu-prefix-sid neighbor 20.42.71.71 peer-as 64510
+set protocols bgp group bgp-lu-prefix-sid advertise-prefix-sid
+set protocols bgp group bgp-lu-prefix-sid accept-prefix-sid
+set protocols bgp group bgp-lu-prefix-sid advertise-srgb
+set protocols bgp group bgp-ct local-address 100.0.0.42
+set protocols bgp group bgp-ct family inet labeled-unicast rib inet.3
+set protocols bgp group bgp-ct family inet transport
+set protocols bgp group bgp-ct peer-as 64513
+set protocols bgp group bgp-ct local-as 64513
+set protocols bgp group bgp-ct neighbor 100.0.0.34
+set protocols bgp group toAS64512 peer-as 64512
+set protocols bgp group toAS64512 local-as 64513
+set protocols bgp group toAS64512 neighbor 20.42.137.137 family inet labeled-unicast rib inet.3
+set protocols bgp group toAS64512 neighbor 21.42.137.137 import AS64512_CT
+set protocols bgp group toAS64512 neighbor 21.42.137.137 family inet transport
+set protocols bgp group toAS64512 neighbor 21.42.137.137 export AS64512_CT
+set protocols bgp traceoptions file bgp.log
+set protocols bgp traceoptions file size 100m
+set protocols bgp traceoptions flag update detail
+set protocols bgp log-updown
+set protocols isis interface et-0/2/11:0.0 level 2 te-metric 1
+set protocols isis interface et-0/2/11:0.0 level 2 application-specific attribute-group fa128 advertise-delay-metric
+set protocols isis interface et-0/2/11:0.0 level 2 application-specific attribute-group fa128 te-metric 100
+set protocols isis interface et-0/2/11:0.0 level 2 application-specific attribute-group fa128 admin-group RED
+set protocols isis interface et-0/2/11:0.0 level 2 application-specific attribute-group fa128 application flex-algorithm
+set protocols isis interface et-0/2/11:0.0 level 2 disable
+set protocols isis interface et-0/2/11:0.0 level 1 te-metric 1
+set protocols isis interface et-0/2/11:0.0 level 1 application-specific attribute-group fa128 advertise-delay-metric
+set protocols isis interface et-0/2/11:0.0 level 1 application-specific attribute-group fa128 te-metric 100
+set protocols isis interface et-0/2/11:0.0 level 1 application-specific attribute-group fa128 admin-group RED
+set protocols isis interface et-0/2/11:0.0 level 1 application-specific attribute-group fa128 application flex-algorithm
+set protocols isis interface et-0/2/11:0.0 delay-metric 100
+set protocols isis interface et-0/2/11:0.0 point-to-point
+set protocols isis interface lo0.0
+set protocols isis interface et-0/1/9:0.0 level 2 te-metric 1000000
+set protocols isis interface et-0/1/9:0.0 level 2 application-specific attribute-group fa128 advertise-delay-metric
+set protocols isis interface et-0/1/9:0.0 level 2 application-specific attribute-group fa128 te-metric 10
+set protocols isis interface et-0/1/9:0.0 level 2 application-specific attribute-group fa128 admin-group GREEN
+set protocols isis interface et-0/1/9:0.0 level 2 application-specific attribute-group fa128 application flex-algorithm
+set protocols isis interface et-0/1/9:0.0 delay-metric 10
+set protocols isis interface et-0/1/9:0.0 point-to-point
+set protocols isis source-packet-routing node-segment ipv4-index 42
+set protocols isis source-packet-routing flex-algorithm 128
+set protocols isis source-packet-routing flex-algorithm 129
+set protocols isis source-packet-routing flex-algorithm 130
+set protocols isis traffic-engineering l3-unicast-topology
+set protocols isis traffic-engineering advertisement always
+set protocols isis traffic-engineering advertisement application-specific all-applications
+set protocols isis export node-sid
+set protocols mpls traffic-engineering database import l3-unicast-topology bgp-link-state
+set protocols mpls traffic-engineering database import policy bgp-to-mpls
+set protocols mpls traffic-engineering database export policy bgp-to-mpls
+set protocols mpls traffic-engineering database export l3-unicast-topology
+set protocols mpls admin-groups RED 1
+set protocols mpls admin-groups GREEN 2
+set protocols mpls explicit-null
+set protocols mpls label-range srgb-label-range 20000 21999
+set protocols mpls ipv6-tunneling
+set protocols mpls interface all
+set protocols mpls interface et-0/1/3:2.0 admin-group RED
+set protocols mpls interface et-0/2/11:0.0 admin-group RED
+set protocols mpls interface et-0/1/9:0.0 admin-group GREEN
+set protocols ospf traffic-engineering advertisement always
+set protocols ospf source-packet-routing prefix-segment node-sid
+set protocols ospf source-packet-routing node-segment ipv4-index 42
+set protocols ospf source-packet-routing flex-algorithm 128
+set protocols ospf source-packet-routing flex-algorithm 129
+set protocols ospf area 0.0.0.0 interface lo0.0
+set protocols ospf area 0.0.0.0 interface et-0/0/2.0 interface-type p2p
+set protocols ospf area 0.0.0.0 interface et-0/0/2.0 delay-metric 10
+set protocols ospf area 0.0.0.0 interface et-0/0/2.0 delay-measurement
+set protocols ospf area 0.0.0.0 interface et-0/0/2.0 application-specific attribute-group fa128 advertise-interface-delay
+set protocols ospf area 0.0.0.0 interface et-0/0/2.0 application-specific attribute-group fa128 application flex-algorithm
+set protocols ospf area 0.0.0.0 interface et-0/0/0.0 interface-type p2p
+set protocols ospf area 0.0.0.0 interface et-0/0/0.0 delay-measurement
+set protocols ospf area 0.0.0.0 interface et-0/0/0.0 application-specific attribute-group fa128 advertise-interface-delay
+set protocols ospf area 0.0.0.0 interface et-0/0/0.0 application-specific attribute-group fa128 application flex-algorithm
+set protocols ospf area 0.0.0.0 interface et-0/1/3:2.0 interface-type p2p
+set protocols ospf area 0.0.0.0 interface et-0/1/3:2.0 delay-measurement
+set protocols ospf area 0.0.0.0 interface et-0/1/3:2.0 application-specific attribute-group fa128 advertise-interface-delay
+set protocols ospf area 0.0.0.0 interface et-0/1/3:2.0 application-specific attribute-group fa128 application flex-algorithm
+set protocols ospf area 0.0.0.0 interface et-0/1/10:0.0 interface-type p2p
+set protocols ospf area 0.0.0.0 interface et-0/1/10:0.0 delay-metric 10
+set protocols ospf area 0.0.0.0 interface et-0/1/10:0.0 application-specific attribute-group fa128 advertise-interface-delay
+set protocols ospf area 0.0.0.0 interface et-0/1/10:0.0 application-specific attribute-group fa128 application flex-algorithm
+set protocols ospf area 0.0.0.0 interface et-0/1/10:1.0 interface-type p2p
+set protocols ospf area 0.0.0.0 interface et-0/1/10:1.0 delay-metric 10
+set protocols ospf area 0.0.0.0 interface et-0/1/10:1.0 application-specific attribute-group fa128 advertise-interface-delay
+set protocols ospf area 0.0.0.0 interface et-0/1/10:1.0 application-specific attribute-group fa128 application flex-algorithm
+set protocols ospf area 0.0.0.0 interface et-0/1/10.0 interface-type p2p
+set protocols ospf area 0.0.0.0 interface et-0/1/10.0 delay-metric 10
+set protocols ospf area 0.0.0.0 interface et-0/1/10.0 application-specific attribute-group fa128 advertise-interface-delay
+set protocols ospf area 0.0.0.0 interface et-0/1/10.0 application-specific attribute-group fa128 application flex-algorithm
+set protocols source-packet-routing segment-list via-Cisco cisco label 20150
+set protocols source-packet-routing segment-list via-Cisco nokia label 20091
+set protocols source-packet-routing segment-list via-Arista arista label 20071
+set protocols source-packet-routing segment-list via-Arista nokia label 20091
+set protocols source-packet-routing compute-profile compute-sbfd no-label-stack-compression
+set protocols source-packet-routing compute-profile no-compress no-label-stack-compression
+set protocols source-packet-routing preserve-nexthop-hierarchy
+set protocols source-packet-routing source-routing-path via-Arista to 100.0.0.91
+set protocols source-packet-routing source-routing-path via-Arista color 100
+set protocols source-packet-routing source-routing-path via-Arista binding-sid 1000001
+set protocols source-packet-routing source-routing-path via-Arista primary via-Arista
+set protocols source-packet-routing source-routing-path via-Cisco to 100.0.0.91
+set protocols source-packet-routing source-routing-path via-Cisco color 101
+set protocols source-packet-routing source-routing-path via-Cisco binding-sid 1000000
+set protocols source-packet-routing source-routing-path via-Cisco primary via-Cisco
+set protocols source-packet-routing source-routing-path arista1 to 100.0.0.72
+set protocols source-packet-routing source-routing-path arista1 color 100
+set protocols source-packet-routing source-routing-path arista1 binding-sid 1000002
+set protocols source-packet-routing source-routing-path arista1 primary a1 compute
+set protocols source-packet-routing source-routing-path arista2 to 100.0.0.72
+set protocols source-packet-routing source-routing-path arista2 color 101
+set protocols source-packet-routing source-routing-path arista2 binding-sid 1000003
+set protocols source-packet-routing source-routing-path arista2 primary a2 compute
+set protocols source-packet-routing source-routing-path to-Arista to 100.0.0.72
+set protocols source-packet-routing source-routing-path to-Arista primary s1 bfd-liveness-detection sbfd remote-discriminator 72
+set protocols source-packet-routing source-routing-path to-Arista primary s1 bfd-liveness-detection minimum-interval 150
+set protocols source-packet-routing source-routing-path to-Arista primary s1 bfd-liveness-detection multiplier 3
+set protocols source-packet-routing source-routing-path to-Arista primary s1 bfd-liveness-detection no-router-alert-option
+set protocols source-packet-routing source-routing-path to-Arista primary s1 compute compute-sbfd
+set protocols source-packet-routing source-routing-path to-ribbon to 100.0.0.13
+set protocols source-packet-routing source-routing-path to-ribbon primary s1 bfd-liveness-detection sbfd remote-discriminator 1677721613
+set protocols source-packet-routing source-routing-path to-ribbon primary s1 bfd-liveness-detection minimum-interval 100
+set protocols source-packet-routing source-routing-path to-ribbon primary s1 bfd-liveness-detection multiplier 3
+set protocols source-packet-routing source-routing-path to-ribbon primary s1 bfd-liveness-detection no-router-alert-option
+set protocols source-packet-routing source-routing-path to-ribbon primary s1 compute compute-sbfd
+set protocols source-packet-routing source-routing-path to-BGP-LS to 100.0.0.13
+set protocols source-packet-routing source-routing-path to-BGP-LS primary c1 compute no-compress
+set protocols source-packet-routing use-transport-class
+set protocols lldp port-id-subtype interface-name
+set protocols lldp interface all

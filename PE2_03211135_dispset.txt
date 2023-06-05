@@ -1,0 +1,193 @@
+set version 23.2I-20230312.0.0358
+set system host-name Juniper-34-MX204_5
+set system root-authentication encrypted-password "$6$OZvpY4ko$KZD7V09PJuY1jjiZtRYOJBq43yadlqAphQGk/cpWFArhD0HyO1V2NYmKPzTdB8DXCLr3v3zCxuRP4kEVF82D1/"
+set system login user aelita uid 2000
+set system login user aelita class super-user
+set system login user aelita authentication encrypted-password "$6$rVTtENKN$xZcAdTrSk7l3XCicAmjhaMnoMJODHBQJQhPIlhSW9Q2qy7wM5461QCZwTjMz38HGdVNnBZsc/rwqqqPGjfiP70"
+set system services ssh root-login allow
+set system default-address-selection
+set system name-server 192.168.100.100
+set system name-server 192.168.160.100
+set system syslog file interactive-commands interactive-commands any
+set system syslog file messages any notice
+set system syslog file messages authorization info
+set system processes dhcp-service traceoptions file dhcp_logfile
+set system processes dhcp-service traceoptions file size 10m
+set system processes dhcp-service traceoptions level all
+set system processes dhcp-service traceoptions flag packet
+set system ntp server 192.168.100.132
+set logical-systems bgp-ls interfaces xe-0/1/6 unit 0 description "Ericsson: 10"
+set logical-systems bgp-ls interfaces xe-0/1/6 unit 0 family inet address 20.10.34.34/24
+set logical-systems bgp-ls interfaces xe-0/1/6 unit 0 family iso
+set logical-systems bgp-ls interfaces xe-0/1/6 unit 0 family mpls maximum-labels 16
+set logical-systems bgp-ls interfaces xe-0/1/7 unit 0 description "Ciena: 110"
+set logical-systems bgp-ls interfaces xe-0/1/7 unit 0 family inet address 20.34.110.34/24
+set logical-systems bgp-ls interfaces xe-0/1/7 unit 0 family iso mtu 1492
+set logical-systems bgp-ls interfaces xe-0/1/7 unit 0 family mpls maximum-labels 16
+set logical-systems bgp-ls interfaces lo0 unit 1 family inet address 100.0.2.34/32
+set logical-systems bgp-ls interfaces lo0 unit 1 family iso address 49.0002.0000.0000.0034.00
+set logical-systems bgp-ls protocols bgp group BGP-LS local-address 100.0.2.34
+set logical-systems bgp-ls protocols bgp group BGP-LS log-updown
+set logical-systems bgp-ls protocols bgp group BGP-LS family traffic-engineering unicast
+set logical-systems bgp-ls protocols bgp group BGP-LS peer-as 65002
+set logical-systems bgp-ls protocols bgp group BGP-LS local-as 65002
+set logical-systems bgp-ls protocols bgp group BGP-LS neighbor 100.0.0.10
+set logical-systems bgp-ls protocols bgp group BGP-LS neighbor 100.0.0.110
+set logical-systems bgp-ls protocols isis interface xe-0/1/6.0 level 2 metric 10
+set logical-systems bgp-ls protocols isis interface xe-0/1/6.0 point-to-point
+set logical-systems bgp-ls protocols isis interface xe-0/1/7.0 level 2 metric 10
+set logical-systems bgp-ls protocols isis interface xe-0/1/7.0 level 2 hold-time 30
+set logical-systems bgp-ls protocols isis interface xe-0/1/7.0 hello-padding disable
+set logical-systems bgp-ls protocols isis interface xe-0/1/7.0 point-to-point
+set logical-systems bgp-ls protocols isis interface lo0.0
+set logical-systems bgp-ls protocols isis source-packet-routing node-segment ipv4-index 734
+set logical-systems bgp-ls protocols isis level 1 disable
+set logical-systems bgp-ls protocols isis level 2 wide-metrics-only
+set logical-systems bgp-ls protocols isis traffic-engineering l3-unicast-topology
+set logical-systems bgp-ls protocols isis traffic-engineering advertisement always
+set logical-systems bgp-ls protocols isis export node-sid
+set logical-systems bgp-ls protocols mpls traffic-engineering database import l3-unicast-topology
+set logical-systems bgp-ls protocols mpls traffic-engineering database export l3-unicast-topology
+set logical-systems bgp-ls protocols mpls admin-groups RED 1
+set logical-systems bgp-ls protocols mpls admin-groups GREEN 2
+set logical-systems bgp-ls protocols mpls label-range srgb-label-range 20000 21999
+set logical-systems bgp-ls protocols mpls interface all
+set logical-systems bgp-ls protocols mpls interface xe-0/1/7.0 admin-group RED
+set logical-systems bgp-ls protocols mpls interface xe-0/1/6.0 admin-group GREEN
+set logical-systems bgp-ls policy-options policy-statement node-sid term A from route-filter 100.0.2.34/32 exact
+set logical-systems bgp-ls policy-options policy-statement node-sid term A then prefix-segment index 734
+set logical-systems bgp-ls policy-options policy-statement node-sid term A then prefix-segment node-segment
+set logical-systems bgp-ls policy-options policy-statement node-sid term A then accept
+set chassis fpc 0 pic 0 port 0 speed 100g
+set chassis fpc 0 pic 0 port 1 speed 100g
+set chassis fpc 0 pic 1 port 1 speed 10g
+set chassis fpc 0 pic 1 port 3 speed 10g
+set chassis fpc 0 pic 1 port 5 speed 10g
+set chassis fpc 0 pic 1 port 6 speed 10g
+set chassis fpc 0 pic 1 port 7 speed 10g
+set services rpm twamp server light
+set interfaces et-0/0/0 description "JNPR: ACX7100 38"
+set interfaces et-0/0/0 unit 0 family inet address 20.34.38.34/24
+set interfaces et-0/0/0 unit 0 family mpls maximum-labels 16
+set interfaces et-0/0/1 description "JNPR: PTX10001 42"
+set interfaces et-0/0/1 unit 0 family inet address 20.34.42.34/24
+set interfaces et-0/0/1 unit 0 family mpls maximum-labels 16
+set interfaces xe-0/1/1 description "HARNESS SW1: xe-0/0/1"
+set interfaces xe-0/1/1 flexible-vlan-tagging
+set interfaces xe-0/1/1 encapsulation flexible-ethernet-services
+set interfaces xe-0/1/1 unit 42 vlan-id 11
+set interfaces xe-0/1/1 unit 42 family inet address 10.10.0.2/24
+set interfaces xe-0/1/6 description "Ericsson: 10"
+set interfaces xe-0/1/6 mtu 9000
+set interfaces xe-0/1/7 description "Ciena: 110"
+set interfaces xe-0/1/7 mtu 9000
+set interfaces fxp0 unit 0 family inet address 192.168.20.34/23
+set interfaces fxp0 unit 0 family inet6 dhcpv6-client client-type stateful
+set interfaces fxp0 unit 0 family inet6 dhcpv6-client client-ia-type ia-na
+set interfaces fxp0 unit 0 family inet6 dhcpv6-client client-identifier duid-type duid-ll
+set interfaces fxp0 unit 0 family inet6 dhcpv6-client vendor-id Juniper:mx204:CB414
+set interfaces lo0 unit 0 family inet address 100.0.0.34/32
+set interfaces lo0 unit 0 family inet address 100.3.0.34/32
+set interfaces lo0 unit 0 family inet address 100.4.0.34/32
+set interfaces lo0 unit 0 family inet address 100.2.0.34/32
+set interfaces lo0 unit 0 family inet address 100.5.0.34/32
+set interfaces lo0 unit 0 family iso address 49.0001.0000.0000.0000.3400
+set policy-options policy-statement node-sid term A from route-filter 100.0.0.34/32 exact
+set policy-options policy-statement node-sid term A then prefix-segment algorithm 128 index 762
+set policy-options policy-statement node-sid term A then prefix-segment algorithm 128 node-segment
+set policy-options policy-statement node-sid term A then prefix-segment algorithm 129 index 763
+set policy-options policy-statement node-sid term A then prefix-segment algorithm 129 node-segment
+set policy-options policy-statement node-sid term A then prefix-segment index 34
+set policy-options policy-statement node-sid term A then prefix-segment node-segment
+set policy-options policy-statement node-sid term A then accept
+set policy-options policy-statement bgp-transport-export term 1 from protocol direct
+set policy-options policy-statement bgp-transport-export term 1 from rib inet.3
+set policy-options policy-statement bgp-transport-export term 1 from route-filter 100.0.0.34/32 exact
+set policy-options policy-statement bgp-transport-export term 1 from route-filter 100.4.0.34/32 exact
+set policy-options policy-statement bgp-transport-export term 1 then next-hop self
+set policy-options policy-statement bgp-transport-export term 1 then accept
+set policy-options policy-statement bgp-transport-export term 2 from protocol direct
+set policy-options policy-statement bgp-transport-export term 2 from rib bgp.transport.3
+set policy-options policy-statement bgp-transport-export term 2 then next-hop self
+set policy-options policy-statement bgp-transport-export term 2 then accept
+set policy-options policy-statement bgp-transport-export term def then reject
+set policy-options policy-statement loopbacks term 1 from route-filter 100.0.0.34/32 exact
+set policy-options policy-statement loopbacks term 1 from route-filter 100.4.0.34/32 exact
+set policy-options policy-statement loopbacks term 1 then accept
+set policy-options policy-statement loopbacks term def then reject
+set policy-options policy-statement service-export term 1 from protocol bgp
+set policy-options policy-statement service-export term 1 from rib inet.0
+set policy-options policy-statement service-export term 1 then next-hop self
+set policy-options policy-statement service-export term 1 then accept
+set policy-options policy-statement service-export term 2 from protocol direct
+set policy-options policy-statement service-export term 2 from rib inet.0
+set policy-options policy-statement service-export term 2 from route-filter 100.3.0.34/32 exact
+set policy-options policy-statement service-export term 2 then community add gold
+set policy-options policy-statement service-export term 2 then next-hop 100.4.0.34
+set policy-options policy-statement service-export term 2 then accept
+set policy-options policy-statement service-export term 3 from protocol direct
+set policy-options policy-statement service-export term 3 from rib inet.0
+set policy-options policy-statement service-export term 3 from route-filter 100.5.0.34/32 exact
+set policy-options policy-statement service-export term 3 then community add bronze
+set policy-options policy-statement service-export term 3 then next-hop 100.4.0.34
+set policy-options policy-statement service-export term 3 then accept
+set policy-options policy-statement service-export term 4 from protocol direct
+set policy-options policy-statement service-export term 4 from rib inet.0
+set policy-options policy-statement service-export term 4 from route-filter 100.2.0.34/32 exact
+set policy-options policy-statement service-export term 4 then next-hop 100.4.0.34
+set policy-options policy-statement service-export term 4 then accept
+set policy-options policy-statement service-export term def then reject
+set policy-options community bronze members color:0:129
+set policy-options community gold members color:0:128
+set routing-options flex-algorithm 128 color 128
+set routing-options flex-algorithm 128 use-transport-class
+set routing-options flex-algorithm 129 color 129
+set routing-options flex-algorithm 129 use-transport-class
+set routing-options route-distinguisher-id 100.0.0.34
+set routing-options resolution preserve-nexthop-hierarchy
+set routing-options interface-routes rib-group inet inet0to3
+set routing-options static route 0.0.0.0/0 next-hop 192.168.20.1
+set routing-options rib-groups inet0to3 import-rib inet.0
+set routing-options rib-groups inet0to3 import-rib inet.3
+set routing-options rib-groups inet0to3 import-policy loopbacks
+set routing-options rib-groups lu3to0 import-rib inet.3
+set routing-options rib-groups lu3to0 import-rib inet.0
+set routing-options transport-class auto-create
+set routing-options transport-class name 128 color 128
+set routing-options transport-class name 128 tunnel-egress end-point 100.4.0.34
+set routing-options transport-class name 129 color 129
+set routing-options transport-class name 129 tunnel-egress end-point 100.4.0.34
+set protocols router-advertisement interface fxp0.0 managed-configuration
+set protocols bfd sbfd local-discriminator 34
+set protocols bgp group bgp-ct local-address 100.0.0.34
+set protocols bgp group bgp-ct family inet labeled-unicast rib-group lu3to0
+set protocols bgp group bgp-ct family inet labeled-unicast rib inet.3
+set protocols bgp group bgp-ct family inet transport
+set protocols bgp group bgp-ct export bgp-transport-export
+set protocols bgp group bgp-ct peer-as 64513
+set protocols bgp group bgp-ct local-as 64513
+set protocols bgp group bgp-ct neighbor 100.0.0.42
+set protocols bgp group to64512-SN multihop
+set protocols bgp group to64512-SN local-address 100.0.0.34
+set protocols bgp group to64512-SN family inet unicast
+set protocols bgp group to64512-SN export service-export
+set protocols bgp group to64512-SN peer-as 64512
+set protocols bgp group to64512-SN local-as 64513
+set protocols bgp group to64512-SN neighbor 100.1.0.36
+set protocols mpls interface all
+set protocols ospf traffic-engineering advertisement always
+set protocols ospf source-packet-routing prefix-segment node-sid
+set protocols ospf source-packet-routing node-segment ipv4-index 34
+set protocols ospf source-packet-routing flex-algorithm 128
+set protocols ospf source-packet-routing flex-algorithm 129
+set protocols ospf area 0.0.0.0 interface lo0.0
+set protocols ospf area 0.0.0.0 interface et-0/0/0.0 interface-type p2p
+set protocols ospf area 0.0.0.0 interface et-0/0/0.0 delay-measurement
+set protocols ospf area 0.0.0.0 interface et-0/0/0.0 application-specific attribute-group fa128 advertise-interface-delay
+set protocols ospf area 0.0.0.0 interface et-0/0/0.0 application-specific attribute-group fa128 application flex-algorithm
+set protocols ospf area 0.0.0.0 interface et-0/0/1.0 interface-type p2p
+set protocols ospf area 0.0.0.0 interface et-0/0/1.0 delay-metric 100000
+set protocols ospf area 0.0.0.0 interface et-0/0/1.0 application-specific attribute-group fa128 advertise-interface-delay
+set protocols ospf area 0.0.0.0 interface et-0/0/1.0 application-specific attribute-group fa128 application flex-algorithm
+set protocols source-packet-routing
+set protocols lldp interface all

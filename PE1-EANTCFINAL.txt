@@ -1,0 +1,811 @@
+## Last changed: 2023-03-22 08:54:29 UTC
+version 23.2I-20230312.0.0358;
+groups {
+    GR-CORE-INTF {
+        interfaces {
+            <*> {
+                description ********GR-CORE-INTF-SETTINGS-APPLIED-ADD-DESCRIPTION********;
+                traps;
+                inactive: mtu 7192;
+                hold-time up 2000 down 0;
+                damping {
+                    half-life 30;
+                    max-suppress 600;
+                    reuse 250;
+                    suppress 2000;
+                    enable;
+                }
+                unit 0 {
+                    traps;
+                    family iso {
+                        inactive: mtu 7106;
+                    }
+                }
+            }
+            <ae*> {
+                aggregated-ether-options {
+                    bfd-liveness-detection {
+                        version automatic;
+                        minimum-interval 50;
+                        multiplier 3;
+                        no-adaptation;
+                    }
+                    lacp {
+                        active;
+                        accept-data;
+                        hold-time up 2;
+                    }
+                }
+            }
+            /* Interface types: et-, ge-, xe- */
+            "<[egx][te]-*>" {
+                optics-options {
+                    alarm low-light-alarm {
+                        link-down;
+                    }
+                    warning low-light-warning {
+                        syslog;
+                    }
+                }
+            }
+        }
+    }
+    GR-ISIS {
+        protocols {
+            isis {
+                /* Interface types: ae, et-, ge-, xe-; not included: lo0 */
+                interface <*e*> {
+                    level 1 disable;
+                    level 2 {
+                        post-convergence-lfa {
+                            node-protection cost 16777214;
+                        }
+                        inactive: hello-authentication-key-chain KC-ISIS;
+                    }
+                    delay-measurement;
+                    hello-padding strict;
+                    inactive: max-hello-size 7106;
+                    lsp-interval 10;
+                    point-to-point;
+                }
+                /* Interface types: et-, ge-, xe- */
+                interface "<[egx][te]-*>" {
+                    family inet6 {
+                        bfd-liveness-detection {
+                            minimum-interval 1000;
+                            multiplier 3;
+                            no-adaptation;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    GR-BGP {
+        protocols {
+            bgp {
+                group <GR-IBGP*> {
+                    type internal;
+                    inactive: authentication-algorithm ao;
+                    inactive: authentication-key-chain KC-BGP;
+                    multipath;
+                    inactive: tcp-mss 4096;
+                }
+            }
+        }
+    }
+    GR-L3VPN {
+        routing-instances {
+            <*> {
+                instance-type vrf;
+                routing-options {
+                    static {
+                        route 0.0.0.0/0 {
+                            discard;
+                            retain;
+                            no-readvertise;
+                            preference 4294967295;
+                        }
+                    }
+                    multipath {
+                        vpn-unequal-cost;
+                    }
+                }
+            }
+        }
+    }
+    GR-EDGE-INTF {
+        interfaces {
+            <*> {
+                description ********GR-EDGE-INTF-SETTINGS-APPLIED-ADD-DESCRIPTION********;
+                traps;
+                flexible-vlan-tagging;
+                hold-time up 180000 down 0;
+                damping {
+                    half-life 30;
+                    max-suppress 600;
+                    reuse 250;
+                    suppress 2000;
+                    enable;
+                }
+                encapsulation flexible-ethernet-services;
+            }
+            <ae*> {
+                aggregated-ether-options {
+                    lacp {
+                        active;
+                        accept-data;
+                        hold-time up 2;
+                    }
+                }
+            }
+            "<[egx][te]-*>" {
+                optics-options {
+                    alarm low-light-alarm {
+                        link-down;
+                    }
+                    warning low-light-warning {
+                        syslog;
+                    }
+                }
+            }
+        }
+    }
+}
+system {
+    host-name JNPR-036-MX204;
+    root-authentication {
+        encrypted-password "$6$5byGfFpq$qz3VC6AYlvNKDOM48tfo5QOAuLZkGCSJ4yPyyNjZjE8KZQKTqnDmhkSGxlleApjGBL0gubCx5G4.1JOXB6Gni."; ## SECRET-DATA
+    }
+    login {
+        user aelita {
+            uid 2001;
+            class super-user;
+            authentication {
+                encrypted-password "$6$bHlU0.Mb$hOPwz3snONLdcfBBH.aqFgUXu3TKoYaY0Xiqshq53bXXkwW0Wc7W5i5yLvusmko8fSjosJG2Pvx1VV.zB6VrR/"; ## SECRET-DATA
+            }
+        }
+        user kszarkowicz {
+            uid 2000;
+            class super-user;
+            authentication {
+                encrypted-password "$6$DFRnkO1D$9VONDuzgbo731f87LseajyFydTOFjvv4DKUaPfgXrfQbxDb5rLYEGQEd84MYA6v34aygwzsec/Q69bHUE.WYz1"; ## SECRET-DATA
+            }
+        }
+        message "\n\n******************************************************************\nThis system is used by kszarkowicz for SRv6 testing. DO NOT TOUCH!\n******************************************************************\n\n";
+    }
+    services {
+        ssh {
+            root-login allow;
+        }
+    }
+    name-server {
+        192.168.100.100;
+        192.168.160.100;
+    }
+    syslog {
+        file interactive-commands {
+            interactive-commands any;
+        }
+        file messages {
+            any notice;
+            authorization info;
+        }
+    }
+    processes {
+        dhcp-service {
+            traceoptions {
+                file dhcp_logfile size 10m;
+                level all;
+                flag packet;
+            }
+        }
+    }
+    ntp {
+        server 192.168.100.132;
+    }
+}
+logical-systems {
+    bgp-ct {
+        interfaces {
+            et-0/0/0 {
+                unit 0 {
+                    vlan-id 100;
+                    family inet {
+                        address 20.36.137.36/24;
+                    }
+                    family iso;
+                    family mpls {
+                        maximum-labels 16;
+                    }
+                }
+                unit 1 {
+                    vlan-id 200;
+                    family inet {
+                        address 22.36.137.36/24;
+                    }
+                    family iso;
+                    family mpls {
+                        maximum-labels 16;
+                    }
+                }
+                unit 2 {
+                    vlan-id 300;
+                    family inet {
+                        address 24.36.137.36/24;
+                    }
+                    family iso;
+                    family mpls {
+                        maximum-labels 16;
+                    }
+                }
+            }
+            et-0/0/1 {
+                unit 0 {
+                    vlan-id 100;
+                    family inet {
+                        address 21.36.137.36/24;
+                    }
+                    family mpls {
+                        maximum-labels 16;
+                    }
+                }
+                unit 1 {
+                    vlan-id 200;
+                    family inet {
+                        address 23.36.137.36/24;
+                    }
+                    family mpls {
+                        maximum-labels 16;
+                    }
+                }
+                unit 2 {
+                    vlan-id 300;
+                    family inet {
+                        address 25.36.137.36/24;
+                    }
+                    family mpls {
+                        maximum-labels 16;
+                    }
+                }
+            }
+            xe-0/1/4 {
+                unit 0 {
+                    description "Spirent: 4";
+                    family inet {
+                        address 172.17.1.1/24;
+                        address 172.17.2.1/24;
+                    }
+                }
+            }
+            lo0 {
+                unit 1 {
+                    family inet {
+                        address 100.1.0.36/32 {
+                            primary;
+                        }
+                        address 100.2.0.36/32;
+                        address 100.3.0.36/32;
+                        address 100.4.0.36/32;
+                        address 100.5.0.36/32;
+                        address 100.7.0.36/32;
+                        address 100.9.0.36/32;
+                        address 100.6.0.36/32;
+                    }
+                    family iso {
+                        address 49.0001.1000.0000.0036.00;
+                    }
+                    family mpls;
+                }
+            }
+        }
+        protocols {
+            bgp {
+                group bgp-lu {
+                    type internal;
+                    local-address 100.1.0.36;
+                    family inet {
+                        labeled-unicast {
+                            rib-group lu3to0;
+                            rib {
+                                inet.3;
+                            }
+                        }
+                    }
+                    export lu-export;
+                    local-as 64512;
+                    neighbor 100.1.0.37;
+                }
+                group bgp-ct {
+                    type internal;
+                    local-address 100.2.0.36;
+                    family inet {
+                        transport;
+                    }
+                    export ct-export;
+                    local-as 64512;
+                    neighbor 100.2.0.37;
+                }
+                group to64513-SN {
+                    multihop;
+                    local-address 100.1.0.36;
+                    family inet {
+                        unicast;
+                    }
+                    export service-export;
+                    peer-as 64513;
+                    local-as 64512;
+                    neighbor 100.0.0.34;
+                }
+                traceoptions {
+                    file bgp.log size 100m;
+                    flag all detail;
+                }
+            }
+            isis {
+                interface et-0/0/0.0 {
+                    point-to-point;
+                }
+                interface et-0/0/0.1 {
+                    point-to-point;
+                }
+                interface et-0/0/0.2 {
+                    point-to-point;
+                }
+                interface lo0.1 {
+                    passive;
+                }
+            }
+            mpls {
+                traffic-engineering;
+                no-cspf;
+                label-switched-path to-ASBR1-gold {
+                    from 100.7.0.36;
+                    to 100.7.0.37;
+                    install 100.1.0.37/32;
+                    ultimate-hop-popping;
+                    no-self-ping;
+                    primary to-freertr-2;
+                    transport-class tc-128;
+                }
+                label-switched-path to-ASBR1-bronze {
+                    from 100.9.0.36;
+                    to 100.9.0.37;
+                    install 100.1.0.37/32;
+                    ultimate-hop-popping;
+                    no-self-ping;
+                    primary to-freertr-3;
+                    transport-class tc-129;
+                }
+                label-switched-path to-ASBR1-be {
+                    to 100.1.0.37;
+                    ultimate-hop-popping;
+                    no-self-ping;
+                    primary to-freertr-1;
+                }
+                path to-freertr-1 {
+                    20.36.137.137 strict;
+                }
+                path to-freertr-2 {
+                    22.36.137.137 strict;
+                }
+                path to-freertr-3 {
+                    24.36.137.137 strict;
+                }
+                interface et-0/0/1.0;
+                interface et-0/0/0.0;
+                interface et-0/0/0.1;
+                interface et-0/0/0.2;
+                interface et-0/0/1.1;
+                interface et-0/0/1.2;
+                interface lo0.1;
+                static-label-switched-path push-0 {
+                    ingress {
+                        next-hop 20.36.137.137;
+                        to 100.4.0.36;
+                        push 0;
+                    }
+                }
+            }
+            rsvp {
+                interface et-0/0/0.0;
+                interface et-0/0/1.0;
+                interface et-0/0/0.1;
+                interface et-0/0/0.2;
+                interface et-0/0/1.1;
+                interface et-0/0/1.2;
+                interface lo0.1;
+            }
+        }
+        policy-options {
+            route-filter-list ct-pfx {
+                100.4.0.36/32 exact {
+                    label 0;
+                }
+            }
+            policy-statement ct-export {
+                term 1 {
+                    from {
+                        protocol direct;
+                        rib bgp.transport.3;
+                        route-filter-list ct-pfx;
+                    }
+                    then {
+                        next-hop 100.1.0.36;
+                        accept;
+                    }
+                }
+                term def {
+                    then reject;
+                }
+            }
+            policy-statement isis-filter {
+                term isis-rt {
+                    from {
+                        route-filter 100.4.0.36/32 exact;
+                    }
+                    then reject;
+                }
+                then accept;
+            }
+            policy-statement loopbacks {
+                term 1 {
+                    from {
+                        route-filter 100.1.0.36/32 exact;
+                        route-filter 100.4.0.36/32 exact;
+                    }
+                    then accept;
+                }
+                term def {
+                    then reject;
+                }
+            }
+            policy-statement lu-export {
+                term 1 {
+                    from {
+                        protocol direct;
+                        rib inet.3;
+                        route-filter 100.1.0.36/32 exact;
+                        route-filter 100.4.0.36/32 exact;
+                    }
+                    then {
+                        next-hop self;
+                        accept;
+                    }
+                }
+                term def {
+                    then reject;
+                }
+            }
+            policy-statement lu3to0-policy {
+                term 1 {
+                    then {
+                        community add no-ex;
+                    }
+                }
+            }
+            policy-statement nexthops {
+                term 1 {
+                    from {
+                        route-filter 100.4.0.36/32 exact;
+                    }
+                    then accept;
+                }
+                term def {
+                    then reject;
+                }
+            }
+            policy-statement service-export {
+                term 1 {
+                    from {
+                        protocol bgp;
+                        rib inet.0;
+                    }
+                    then {
+                        next-hop self;
+                        accept;
+                    }
+                }
+                term 2 {
+                    from {
+                        protocol direct;
+                        rib inet.0;
+                        route-filter 100.3.0.36/32 exact;
+                        route-filter 172.17.1.0/24 exact;
+                    }
+                    then {
+                        community add gold;
+                        next-hop 100.4.0.36;
+                        accept;
+                    }
+                }
+                term 3 {
+                    from {
+                        protocol direct;
+                        rib inet.0;
+                        route-filter 100.5.0.36/32 exact;
+                        route-filter 172.17.2.0/24 exact;
+                    }
+                    then {
+                        community add bronze;
+                        next-hop 100.4.0.36;
+                        accept;
+                    }
+                }
+                term 4 {
+                    from {
+                        protocol direct;
+                        rib inet.0;
+                        route-filter 100.2.0.36/32 exact;
+                    }
+                    then {
+                        next-hop 100.4.0.36;
+                        accept;
+                    }
+                }
+                term def {
+                    then reject;
+                }
+            }
+            community bronze members color:0:129;
+            community gold members color:0:128;
+            community no-ex members no-export;
+        }
+        routing-options {
+            route-distinguisher-id 100.0.0.36;
+            interface-routes {
+                rib-group inet inet0to3;
+            }
+            router-id 100.1.0.36;
+            static {
+                rib-group tc-ribs;
+                inactive: route 100.4.0.36/32 next-hop 20.36.137.137;
+                route 100.7.0.37/32 next-hop 22.36.137.137;
+                route 100.9.0.37/32 next-hop 24.36.137.137;
+            }
+            rib-groups {
+                lu3to0 {
+                    import-rib [ inet.3 inet.0 ];
+                    import-policy lu3to0-policy;
+                }
+                inet0to3 {
+                    import-rib [ inet.0 inet.3 ];
+                    import-policy loopbacks;
+                }
+                tc-ribs {
+                    import-rib [ inet.0 junos-rti-tc-128.inet.3 junos-rti-tc-129.inet.3 ];
+                    import-policy nexthops;
+                }
+            }
+            transport-class {
+                auto-create;
+                name tc-128 {
+                    color 128;
+                    tunnel-egress {
+                        end-point 100.4.0.36;
+                    }
+                }
+                name tc-129 {
+                    color 129;
+                    tunnel-egress {
+                        end-point 100.4.0.36;
+                    }
+                }
+            }
+        }
+    }
+}
+chassis {
+    dump-on-panic;
+    fpc 0 {
+        pic 0 {
+            port 0 {
+                speed 100g;
+            }
+            port 1 {
+                speed 40g;
+            }
+            port 2 {
+                speed 10g;
+            }
+            port 3 {
+                speed 100g;
+            }
+        }
+        pic 1 {
+            port 0 {
+                speed 10g;
+            }
+            port 1 {
+                speed 10g;
+            }
+            port 2 {
+                speed 10g;
+            }
+            port 3 {
+                speed 10g;
+            }
+            port 4 {
+                speed 10g;
+            }
+            port 5 {
+                speed 10g;
+            }
+            port 6 {
+                speed 10g;
+            }
+            port 7 {
+                speed 10g;
+            }
+        }
+    }
+    network-services enhanced-ip;
+}
+services {
+    network-slicing {
+        slice SL-A;
+        slice SL-B;
+    }
+}
+interfaces {
+    et-0/0/0 {
+        hierarchical-scheduler;
+        vlan-tagging;
+    }
+    et-0/0/1 {
+        vlan-tagging;
+    }
+    xe-0/1/1 {
+        apply-groups GR-CORE-INTF;
+        description JNPR-36:xe-0/1/1;
+        unit 0 {
+            family inet6 {
+                address 2001:0:30:36::36/64;
+            }
+        }
+    }
+    xe-0/1/4 {
+        description "Spirent: 4";
+    }
+    fxp0 {
+        unit 0 {
+            family inet {
+                address 192.168.20.36/23;
+            }
+        }
+    }
+    lo0 {
+        unit 0 {
+            family inet {
+                address 100.0.0.36/32;
+            }
+            family iso {
+                address 49.0000.1000.0000.0036.00;
+            }
+            family inet6 {
+                address 2002::36/128;
+            }
+        }
+    }
+}
+policy-options {
+    policy-statement PS-LOAD-BALANCE {
+        then {
+            load-balance per-packet;
+        }
+    }
+    community bronze members color:0:129;
+    community gold members color:0:128;
+}
+class-of-service {
+    traffic-control-profiles {
+        TCP-10G {
+            shaping-rate 10g;
+        }
+        TCP-A {
+            shaping-rate 10m;
+        }
+        TCP-B {
+            shaping-rate 20m;
+        }
+    }
+    interfaces {
+        et-0/0/0 {
+            output-traffic-control-profile TCP-10G;
+            slice SL-A {
+                output-traffic-control-profile TCP-B;
+            }
+        }
+    }
+}
+routing-options {
+    source-packet-routing {
+        srv6 {
+            locator SL-000 {
+                fcba:0:0:36::/64;
+                block-length 48;
+                function-length 16;
+            }
+            inactive: no-reduced-srh;
+        }
+    }
+    route-distinguisher-id 100.0.0.36;
+    resolution {
+        preserve-nexthop-hierarchy;
+    }
+    router-id 100.0.0.36;
+    autonomous-system 65000;
+    ipv6-router-id 2002::36;
+    static {
+        route 0.0.0.0/0 next-hop 192.168.20.1;
+    }
+    forwarding-table {
+        export PS-LOAD-BALANCE;
+    }
+}
+protocols {
+    router-advertisement {
+        interface fxp0.0 {
+            managed-configuration;
+        }
+    }
+    esis {
+        disable;
+    }
+    isis {
+        apply-groups GR-ISIS;
+        interface xe-0/1/1.0;
+        interface lo0.0 {
+            passive;
+        }
+        source-packet-routing {
+            no-strict-spf;
+            srv6 {
+                locator SL-000 {
+                    end-sid fcba:0:0:36:: {
+                        flavor {
+                            psp;
+                            usp;
+                            usd;
+                        }
+                    }
+                }
+            }
+        }
+        level 1 disable;
+        level 2 {
+            purge-originator empty;
+            wide-metrics-only;
+        }
+        spf-options {
+            delay 50;
+            holddown 2000;
+            rapid-runs 5;
+        }
+        traceoptions {
+            flag error detail;
+            flag state detail;
+            file isis size 5m files 10 world-readable;
+        }
+        backup-spf-options {
+            use-post-convergence-lfa {
+                maximum-srv6-sids 6;
+                maximum-backup-paths 2;
+            }
+            use-source-packet-routing;
+        }
+        lsp-lifetime 65535;
+        no-ipv4-routing;
+        suppress-attached-bit;
+        overload {
+            timeout 300;
+            advertise-high-metrics;
+        }
+    }
+    lldp {
+        interface all {
+            disable;
+        }
+        interface xe-0/1/1;
+    }
+}

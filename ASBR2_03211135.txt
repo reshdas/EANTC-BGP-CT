@@ -1,0 +1,1177 @@
+## Last changed: 2023-03-21 17:45:07 UTC
+version 22.4R1.11-EVO;
+groups {
+    SR-DEFAULTS {
+        system {
+            services {
+                extension-service {
+                    request-response {
+                        grpc {
+                            clear-text {
+                                port 32767;
+                            }
+                            max-connections 30;
+                            routing-instance mgmt_junos;
+                        }
+                    }
+                }
+            }
+            management-instance;
+        }
+        services {
+            monitoring {
+                twamp {
+                    server {
+                        light;
+                    }
+                }
+            }
+        }
+        interfaces {
+            lo0 {
+                unit 0 {
+                    family inet {
+                        address 100.0.0.42/32;
+                    }
+                    family iso {
+                        address 49.0001.0000.0000.0042.00;
+                    }
+                }
+            }
+            et-0/0/2 {
+                description "JNPR: 34";
+                unit 0 {
+                    family inet {
+                        address 20.34.42.42/24;
+                    }
+                    family mpls {
+                        maximum-labels 16;
+                    }
+                }
+            }
+            et-0/0/0 {
+                description "JNPR: ACX7100-48L 38";
+                unit 0 {
+                    family inet {
+                        address 20.38.42.42/24;
+                    }
+                    family mpls {
+                        maximum-labels 16;
+                    }
+                }
+            }
+            et-0/0/8 {
+                description "RARE: 137-1";
+                speed 40g;
+                unit 0 {
+                    family inet {
+                        address 20.42.137.42/24;
+                    }
+                    family mpls {
+                        maximum-labels 16;
+                    }
+                }
+            }
+            et-0/2/11:0 {
+                description "Arista: 71";
+                unit 0 {
+                    family inet {
+                        address 20.42.71.42/24;
+                    }
+                    family iso;
+                    family inet6;
+                    family mpls {
+                        maximum-labels 16;
+                    }
+                }
+            }
+            et-0/2/11:3 {
+                description "IXIA: 23";
+                flexible-vlan-tagging;
+                unit 16 {
+                    description "Ixia: vlan 10 ISIS";
+                    vlan-id 16;
+                    family inet {
+                        address 50.10.42.1/24;
+                    }
+                    family inet6 {
+                        address 2600:50:10:42::1/64;
+                    }
+                }
+                unit 11 {
+                    description "Ixia: OSPF vlan 11";
+                    vlan-id 60;
+                    family inet {
+                        address 60.1.42.1/24;
+                    }
+                    family inet6 {
+                        address 2600:60:1:42::1/64;
+                    }
+                }
+                unit 12 {
+                    description "Ixia: vlan 12 plain IP OSPF";
+                    vlan-id 2;
+                    family inet {
+                        address 60.0.42.1/24;
+                    }
+                    family inet6 {
+                        address 2600:60:0:42::1/64;
+                    }
+                }
+                unit 1 {
+                    vlan-id 1;
+                    family inet {
+                        address 60.10.42.1/24;
+                    }
+                    family inet6 {
+                        address 2600:60:10:42::1/64;
+                    }
+                }
+                unit 61 {
+                    vlan-id 61;
+                    family inet {
+                        address 60.128.42.1/24;
+                    }
+                    family inet6 {
+                        address 2600:60:128:42::1/64;
+                    }
+                }
+                unit 62 {
+                    vlan-id 62;
+                    family inet {
+                        address 60.129.42.1/24;
+                    }
+                    family inet6 {
+                        address 2600:60:129:42::1/64;
+                    }
+                }
+                unit 51 {
+                    description "ixia: Flex-Algo 128";
+                    vlan-id 51;
+                    family inet {
+                        address 51.10.42.1/24;
+                    }
+                }
+                unit 52 {
+                    description "ixia: Flex-Algo 129";
+                    vlan-id 52;
+                    family inet {
+                        address 52.10.42.1/24;
+                    }
+                }
+                unit 53 {
+                    description "ixia: Flex-Algo 130";
+                    vlan-id 53;
+                    family inet {
+                        address 53.10.42.1/24;
+                    }
+                }
+                unit 70 {
+                    description "Ixia: 23";
+                    vlan-id 700;
+                    family inet {
+                        address 70.0.42.42/24;
+                    }
+                    family mpls {
+                        maximum-labels 16;
+                    }
+                }
+                unit 71 {
+                    description "Ixia: 23";
+                    vlan-id 701;
+                    family inet {
+                        address 71.0.42.42/24;
+                    }
+                    family mpls {
+                        maximum-labels 16;
+                    }
+                }
+                unit 72 {
+                    description "Ixia: 23";
+                    vlan-id 702;
+                    family inet {
+                        address 72.0.42.42/24;
+                    }
+                    family mpls {
+                        maximum-labels 16;
+                    }
+                }
+            }
+            et-0/2/11 {
+                number-of-sub-ports 4;
+                speed 10g;
+            }
+            et-0/1/3:2 {
+                description "Nokia: 91";
+                unit 0 {
+                    family inet {
+                        address 20.42.91.42/24;
+                    }
+                    family mpls {
+                        maximum-labels 16;
+                    }
+                }
+            }
+            et-0/1/3 {
+                number-of-sub-ports 4;
+                speed 10g;
+            }
+            et-0/0/10 {
+                description "RARE: 137-2";
+                speed 40g;
+                unit 0 {
+                    family inet {
+                        address 21.42.137.42/24;
+                    }
+                    family mpls {
+                        maximum-labels 16;
+                    }
+                }
+            }
+            et-0/1/9:0 {
+                description "Cisco: 150";
+                unit 0 {
+                    family inet {
+                        address 20.42.150.42/24;
+                    }
+                    family iso;
+                    family mpls {
+                        maximum-labels 16;
+                    }
+                }
+            }
+            et-0/1/9 {
+                number-of-sub-ports 4;
+                speed 10g;
+            }
+            inactive: et-0/1/10:0 {
+                description "Cisco: 400G-ZR+";
+                optics-options {
+                    wavelength 1567.13;
+                }
+                unit 0 {
+                    description "Cisco: channel 0";
+                    family inet {
+                        address 22.42.158.42/24;
+                    }
+                    family mpls {
+                        maximum-labels 16;
+                    }
+                }
+            }
+            et-0/1/8 {
+                description "Ciena: 110";
+                speed 400g;
+                optics-options {
+                    wavelength 1567.13;
+                    laser-enable;
+                }
+            }
+            inactive: et-0/1/10:1 {
+                unit 0 {
+                    description "Cisco: channel 1";
+                    family inet {
+                        address 23.42.158.42/24;
+                    }
+                    family mpls {
+                        maximum-labels 16;
+                    }
+                }
+            }
+            et-0/1/10 {
+                description "Cisco: 400G";
+                speed 400g;
+                optics-options {
+                    wavelength 1567.13;
+                    laser-enable;
+                }
+                unit 0 {
+                    family inet {
+                        address 22.42.158.42/24;
+                    }
+                    family mpls {
+                        maximum-labels 16;
+                    }
+                }
+            }
+            et-0/2/8 {
+                description spirent;
+                unit 0 {
+                    family inet {
+                        address 172.16.1.1/24;
+                    }
+                }
+            }
+        }
+        policy-options {
+            policy-statement bgp-isis-export {
+                term A1 {
+                    from {
+                        route-filter 51.10.42.0/24 exact;
+                    }
+                    then {
+                        community add color-128;
+                        accept;
+                    }
+                }
+                term A2 {
+                    from {
+                        route-filter 52.10.42.0/24 exact;
+                    }
+                    then {
+                        community add color-129;
+                        accept;
+                    }
+                }
+                term A3 {
+                    from {
+                        route-filter 53.10.42.0/24 exact;
+                    }
+                    then {
+                        community add color-130;
+                        accept;
+                    }
+                }
+                term SR-TE1 {
+                    from {
+                        route-filter 70.0.42.0/24 exact;
+                    }
+                    then {
+                        community add color-100;
+                        accept;
+                    }
+                }
+                term SR-TE2 {
+                    from {
+                        route-filter 71.0.42.0/24 exact;
+                    }
+                    then {
+                        community add color-100;
+                        accept;
+                    }
+                }
+                term SR-TE3 {
+                    from {
+                        route-filter 72.0.42.0/24 exact;
+                    }
+                    then {
+                        community add color-101;
+                        accept;
+                    }
+                }
+                term A {
+                    from family inet-vpn;
+                    then accept;
+                }
+                term B {
+                    from family inet6-vpn;
+                    then accept;
+                }
+                term C {
+                    from {
+                        route-filter 60.10.0.0/16 prefix-length-range /24-/24;
+                    }
+                    then accept;
+                }
+                term D {
+                    from {
+                        route-filter 2600:60:10:42::/64 exact;
+                    }
+                    then accept;
+                }
+            }
+            policy-statement bgp-ospf-export {
+                term ospf-fa-128 {
+                    from community target-128;
+                    then {
+                        community add color-128;
+                        accept;
+                    }
+                }
+                term ospf-fa-129 {
+                    from community target-129;
+                    then {
+                        community add color-129;
+                    }
+                }
+                term A {
+                    from family inet-vpn;
+                    then accept;
+                }
+                term B {
+                    from family inet6-vpn;
+                    then accept;
+                }
+                term C {
+                    from {
+                        route-filter 60.0.0.0/16 prefix-length-range /24-/24;
+                    }
+                    then accept;
+                }
+                term D {
+                    from {
+                        route-filter 2600:60:0:42::/64 exact;
+                    }
+                    then accept;
+                }
+            }
+            policy-statement node-sid {
+                term A {
+                    from {
+                        route-filter 100.0.0.42/32 exact;
+                    }
+                    then {
+                        prefix-segment {
+                            algorithm 128 index 270 node-segment;
+                            algorithm 129 index 271 node-segment;
+                            algorithm 130 index 272 node-segment;
+                            index 42;
+                            node-segment;
+                        }
+                        accept;
+                    }
+                }
+            }
+            policy-statement MPATH-CBF {
+                from protocol [ spring-te l-isis bgp evpn ];
+                then accept;
+            }
+            policy-statement cbf {
+                from protocol [ bgp spring-te l-isis ];
+                then cos-next-hop-map cbf;
+            }
+            policy-statement bgp-to-mpls {
+                term A {
+                    from {
+                        family traffic-engineering;
+                        protocol bgp;
+                    }
+                    then accept;
+                }
+            }
+            policy-statement bgp-prefix-sid {
+                term A {
+                    from {
+                        route-filter 100.0.0.42/32 exact;
+                    }
+                    then {
+                        prefix-segment {
+                            index 42;
+                        }
+                        accept;
+                    }
+                }
+                term B {
+                    from {
+                        protocol bgp;
+                        route-filter 100.0.0.0/8 prefix-length-range /32-/32;
+                    }
+                    then {
+                        prefix-segment {
+                            redistribute;
+                        }
+                        accept;
+                    }
+                }
+            }
+            community target-128 members target:6128:6128;
+            community target-129 members target:6129:6129;
+            community color-128 members color:0:128;
+            community color-129 members color:0:129;
+            community color-130 members color:0:130;
+            community color-100 members color:0:100;
+            community color-101 members color:0:101;
+        }
+        class-of-service {
+            forwarding-policy {
+                next-hop-map cbf-map-red {
+                    forwarding-class best-effort {
+                        transport-class {
+                            color 100;
+                        }
+                    }
+                    forwarding-class expedited-forwarding {
+                        transport-class {
+                            color 101;
+                        }
+                    }
+                }
+                next-hop-map cbf {
+                    forwarding-class best-effort {
+                        lsp-next-hop via-Arista;
+                    }
+                    forwarding-class expedited-forwarding {
+                        lsp-next-hop via-Cisco;
+                    }
+                }
+            }
+        }
+        firewall {
+            family inet {
+                filter cbf {
+                    term A {
+                        from {
+                            dscp be;
+                        }
+                        then {
+                            count cbf-be;
+                            forwarding-class best-effort;
+                            accept;
+                        }
+                    }
+                    term B {
+                        from {
+                            dscp ef;
+                        }
+                        then {
+                            count cbf-ef;
+                            forwarding-class expedited-forwarding;
+                            accept;
+                        }
+                    }
+                }
+            }
+        }
+        routing-instances {
+            isis {
+                instance-type vrf;
+                interface et-0/2/11:3.16;
+                interface et-0/2/11:3.51;
+                interface et-0/2/11:3.52;
+                interface et-0/2/11:3.53;
+                vrf-target target:5001:5001;
+                vrf-table-label;
+            }
+            ospf {
+                instance-type vrf;
+                interface et-0/2/11:3.11;
+                vrf-target target:6001:6001;
+                vrf-table-label;
+            }
+            ospf-fa-128 {
+                instance-type vrf;
+                interface et-0/2/11:3.61;
+                interface et-0/2/8.0;
+                vrf-target target:6128:6128;
+                vrf-table-label;
+            }
+            ospf-fa-129 {
+                instance-type vrf;
+                interface et-0/2/11:3.62;
+                vrf-target target:6129:6129;
+                vrf-table-label;
+            }
+            sr-te {
+                instance-type vrf;
+                interface et-0/2/11:3.71;
+                interface et-0/2/11:3.72;
+                vrf-target target:7001:7001;
+                vrf-table-label;
+            }
+            mgmt_junos {
+                routing-options {
+                    static {
+                        route 0.0.0.0/0 next-hop 192.168.20.1;
+                    }
+                }
+                description default;
+            }
+        }
+        routing-options {
+            flex-algorithm 128 {
+                definition {
+                    metric-type delay-metric;
+                }
+                color 128;
+                use-transport-class;
+            }
+            flex-algorithm 129 {
+                definition {
+                    metric-type igp-metric;
+                    admin-group exclude GREEN;
+                }
+                color 129;
+                use-transport-class;
+            }
+            flex-algorithm 130 {
+                color 130;
+                use-transport-class;
+            }
+            route-distinguisher-id 100.0.0.42;
+            rib inet.3 {
+                inactive: policy-multipath policy MPATH-CBF;
+            }
+            resolution {
+                preserve-nexthop-hierarchy;
+            }
+            transport-class {
+                auto-create;
+                name 128 {
+                    color 128;
+                    fallback {
+                        none;
+                    }
+                }
+                name 129 {
+                    color 129;
+                    fallback {
+                        none;
+                    }
+                }
+                name 130 {
+                    color 130;
+                    fallback {
+                        none;
+                    }
+                }
+                name 100 {
+                    color 100;
+                }
+                name 101 {
+                    color 101;
+                }
+                any-class {
+                    color 102;
+                }
+            }
+            forwarding-table {
+                inactive: export cbf;
+                chained-composite-next-hop {
+                    ingress {
+                        l3vpn;
+                    }
+                }
+            }
+        }
+        protocols {
+            bfd {
+                sbfd {
+                    local-discriminator 42;
+                }
+            }
+            bgp {
+                group leaf {
+                    local-address 100.0.0.42;
+                    family inet {
+                        labeled-unicast;
+                        inactive: unicast;
+                    }
+                    family inet-vpn {
+                        unicast;
+                    }
+                    family inet6 {
+                        unicast;
+                    }
+                    family inet6-vpn {
+                        unicast;
+                    }
+                    export bgp-ospf-export;
+                    peer-as 64512;
+                    local-as 64512 loops 2;
+                    neighbor 100.0.0.38;
+                    vpn-apply-export;
+                    advertise-srgb;
+                }
+                group leaf-isis {
+                    local-address 100.0.0.42;
+                    family inet {
+                        unicast;
+                    }
+                    family inet-vpn {
+                        unicast {
+                            nexthop-resolution {
+                                preserve-nexthop-hierarchy;
+                            }
+                        }
+                    }
+                    family inet6 {
+                        unicast;
+                    }
+                    family inet6-vpn {
+                        unicast;
+                    }
+                    export bgp-isis-export;
+                    peer-as 64512;
+                    local-as 64512 loops 2;
+                    neighbor 100.0.0.71;
+                    vpn-apply-export;
+                }
+                inactive: group bgp-ls {
+                    family traffic-engineering {
+                        unicast;
+                    }
+                    peer-as 64512;
+                    local-as 65300;
+                    neighbor 20.42.71.71;
+                }
+                group bgp-lu-prefix-sid {
+                    family inet {
+                        labeled-unicast;
+                    }
+                    export bgp-prefix-sid;
+                    local-as 64514;
+                    neighbor 20.42.71.71 {
+                        peer-as 64510;
+                    }
+                    advertise-prefix-sid;
+                    accept-prefix-sid;
+                    advertise-srgb;
+                }
+                log-updown;
+            }
+            isis {
+                interface et-0/2/11:0.0 {
+                    level 2 {
+                        te-metric 1;
+                        application-specific {
+                            attribute-group fa128 {
+                                advertise-delay-metric;
+                                te-metric 100;
+                                admin-group RED;
+                                application {
+                                    flex-algorithm;
+                                }
+                            }
+                        }
+                        disable;
+                    }
+                    level 1 {
+                        te-metric 1;
+                        application-specific {
+                            attribute-group fa128 {
+                                advertise-delay-metric;
+                                te-metric 100;
+                                admin-group RED;
+                                application {
+                                    flex-algorithm;
+                                }
+                            }
+                        }
+                    }
+                    delay-metric 100;
+                    point-to-point;
+                }
+                interface lo0.0;
+                interface et-0/1/9:0.0 {
+                    level 2 {
+                        te-metric 1000000;
+                        application-specific {
+                            attribute-group fa128 {
+                                advertise-delay-metric;
+                                te-metric 10;
+                                admin-group GREEN;
+                                application {
+                                    flex-algorithm;
+                                }
+                            }
+                        }
+                    }
+                    delay-metric 10;
+                    point-to-point;
+                }
+                source-packet-routing {
+                    node-segment ipv4-index 42;
+                    flex-algorithm [ 128 129 130 ];
+                }
+                traffic-engineering {
+                    l3-unicast-topology;
+                    advertisement {
+                        always;
+                        application-specific {
+                            all-applications;
+                        }
+                    }
+                }
+                export node-sid;
+            }
+            mpls {
+                traffic-engineering {
+                    database {
+                        import {
+                            l3-unicast-topology {
+                                bgp-link-state;
+                            }
+                            policy bgp-to-mpls;
+                        }
+                        export {
+                            policy bgp-to-mpls;
+                            l3-unicast-topology;
+                        }
+                    }
+                }
+                admin-groups {
+                    RED 1;
+                    GREEN 2;
+                }
+                explicit-null;
+                label-range {
+                    srgb-label-range 20000 21999;
+                }
+                ipv6-tunneling;
+                interface all;
+                interface et-0/1/3:2.0 {
+                    admin-group RED;
+                }
+                interface et-0/2/11:0.0 {
+                    admin-group RED;
+                }
+                interface et-0/1/9:0.0 {
+                    admin-group GREEN;
+                }
+            }
+            ospf {
+                traffic-engineering {
+                    advertisement always;
+                }
+                source-packet-routing {
+                    prefix-segment node-sid;
+                    node-segment ipv4-index 42;
+                    flex-algorithm [ 128 129 ];
+                }
+                area 0.0.0.0 {
+                    interface lo0.0;
+                    interface et-0/0/2.0 {
+                        interface-type p2p;
+                        delay-metric 10;
+                        delay-measurement;
+                        application-specific {
+                            attribute-group fa128 {
+                                advertise-interface-delay;
+                                application {
+                                    flex-algorithm;
+                                }
+                            }
+                        }
+                    }
+                    interface et-0/0/0.0 {
+                        interface-type p2p;
+                        delay-measurement;
+                        application-specific {
+                            attribute-group fa128 {
+                                advertise-interface-delay;
+                                application {
+                                    flex-algorithm;
+                                }
+                            }
+                        }
+                    }
+                    interface et-0/1/3:2.0 {
+                        interface-type p2p;
+                        delay-measurement;
+                        application-specific {
+                            attribute-group fa128 {
+                                advertise-interface-delay;
+                                application {
+                                    flex-algorithm;
+                                }
+                            }
+                        }
+                    }
+                    interface et-0/1/10:0.0 {
+                        interface-type p2p;
+                        delay-metric 10;
+                        inactive: delay-measurement;
+                        application-specific {
+                            attribute-group fa128 {
+                                advertise-interface-delay;
+                                application {
+                                    flex-algorithm;
+                                }
+                            }
+                        }
+                    }
+                    interface et-0/1/10:1.0 {
+                        interface-type p2p;
+                        delay-metric 10;
+                        inactive: delay-measurement;
+                        application-specific {
+                            attribute-group fa128 {
+                                advertise-interface-delay;
+                                application {
+                                    flex-algorithm;
+                                }
+                            }
+                        }
+                    }
+                    interface et-0/1/10.0 {
+                        interface-type p2p;
+                        delay-metric 10;
+                        inactive: delay-measurement;
+                        application-specific {
+                            attribute-group fa128 {
+                                advertise-interface-delay;
+                                application {
+                                    flex-algorithm;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            source-packet-routing {
+                segment-list via-Cisco {
+                    cisco label 20150;
+                    nokia label 20091;
+                }
+                segment-list via-Arista {
+                    arista label 20071;
+                    nokia label 20091;
+                }
+                compute-profile no-compress {
+                    no-label-stack-compression;
+                }
+                preserve-nexthop-hierarchy;
+                source-routing-path via-Arista {
+                    to 100.0.0.91;
+                    color 100;
+                    binding-sid 1000001;
+                    primary {
+                        via-Arista;
+                    }
+                }
+                source-routing-path via-Cisco {
+                    to 100.0.0.91;
+                    color 101;
+                    binding-sid 1000000;
+                    primary {
+                        via-Cisco;
+                    }
+                }
+                source-routing-path arista1 {
+                    to 100.0.0.72;
+                    color 100;
+                    binding-sid 1000002;
+                    primary {
+                        a1 {
+                            compute;
+                        }
+                    }
+                }
+                source-routing-path arista2 {
+                    to 100.0.0.72;
+                    color 101;
+                    binding-sid 1000003;
+                    primary {
+                        a2 {
+                            compute;
+                        }
+                    }
+                }
+                source-routing-path to-Arista {
+                    to 100.0.0.72;
+                    primary {
+                        s1 {
+                            bfd-liveness-detection {
+                                sbfd {
+                                    remote-discriminator 72;
+                                }
+                                minimum-interval 150;
+                                multiplier 3;
+                                no-router-alert-option;
+                            }
+                            compute {
+                                compute-sbfd;
+                            }
+                        }
+                    }
+                }
+                source-routing-path to-ribbon {
+                    to 100.0.0.13;
+                    primary {
+                        s1 {
+                            bfd-liveness-detection {
+                                sbfd {
+                                    remote-discriminator 1677721613;
+                                }
+                                minimum-interval 100;
+                                multiplier 3;
+                                no-router-alert-option;
+                            }
+                            compute {
+                                compute-sbfd;
+                            }
+                        }
+                    }
+                }
+                source-routing-path to-BGP-LS {
+                    to 100.0.0.13;
+                    primary {
+                        c1 {
+                            compute {
+                                no-compress;
+                            }
+                        }
+                    }
+                }
+                use-transport-class;
+            }
+            lldp {
+                interface all;
+            }
+        }
+    }
+    BGP-CT {
+        policy-options {
+            policy-statement AS64512_CT {
+                term 1 {
+                    from {
+                        protocol bgp;
+                        rib bgp.transport.3;
+                    }
+                    then accept;
+                }
+                term 2 {
+                    from {
+                        protocol bgp;
+                        rib inet.3;
+                    }
+                    then accept;
+                }
+                term def {
+                    then reject;
+                }
+            }
+        }
+        protocols {
+            bgp {
+                group bgp-ct {
+                    local-address 100.0.0.42;
+                    family inet {
+                        labeled-unicast {
+                            rib {
+                                inet.3;
+                            }
+                        }
+                        transport;
+                    }
+                    peer-as 64513;
+                    local-as 64513;
+                    neighbor 100.0.0.34;
+                }
+                group toAS64512 {
+                    peer-as 64512;
+                    local-as 64513;
+                    neighbor 20.42.137.137 {
+                        family inet {
+                            labeled-unicast {
+                                rib {
+                                    inet.3;
+                                }
+                            }
+                        }
+                    }
+                    neighbor 21.42.137.137 {
+                        import AS64512_CT;
+                        family inet {
+                            transport;
+                        }
+                        export AS64512_CT;
+                    }
+                }
+            }
+        }
+    }
+}
+apply-groups [ SR-DEFAULTS BGP-CT ];
+system {
+    host-name Juniper-42-PTX10001-36MR-2;
+    root-authentication {
+        encrypted-password "$6$Q1cQPt7e$4npwOfAbnswZmMZjHU8aPHA.m4b.ZcYgn2Rk2NxFbjhFJsHNZzEFRxm1FvBVNCkzCpD.Ddwom0o08GgiWrAOs0"; ## SECRET-DATA
+    }
+    login {
+        user aelita {
+            uid 2000;
+            class super-user;
+            authentication {
+                encrypted-password "$6$KA0Z8Gm3$rx1uswh9.Q.GjnYG.YevOeRxvuChStaWACeC6RWKpVQ8wD65KZ95MOXARJWn.FBqwIMqvZdsT06bfBhshDKS0."; ## SECRET-DATA
+            }
+        }
+        user kszarkowicz {
+            uid 2001;
+            class super-user;
+            authentication {
+                encrypted-password "$6$DFRnkO1D$9VONDuzgbo731f87LseajyFydTOFjvv4DKUaPfgXrfQbxDb5rLYEGQEd84MYA6v34aygwzsec/Q69bHUE.WYz1"; ## SECRET-DATA
+            }
+        }
+    }
+    services {
+        ssh {
+            root-login allow;
+        }
+    }
+    name-server {
+        192.168.100.100;
+        192.168.160.100;
+    }
+    syslog {
+        file interactive-commands {
+            interactive-commands any;
+        }
+        file messages {
+            any notice;
+            authorization info;
+        }
+    }
+    processes {
+        nlsd enable;
+    }
+    ntp {
+        server 192.168.100.132;
+    }
+}
+chassis {
+    auto-image-upgrade;
+}
+interfaces {
+    et-0/0/0 {
+        speed 100g;
+    }
+    et-0/0/2 {
+        description "JNPR: MX204 34";
+        speed 100g;
+    }
+    et-0/1/10:0 {
+        number-of-sub-ports 4;
+        speed 100g;
+    }
+    lo0 {
+        unit 0 {
+            family inet {
+                address 100.0.0.42/32;
+            }
+        }
+    }
+    re0:mgmt-0 {
+        unit 0 {
+            family inet {
+                address 192.168.20.42/23;
+            }
+        }
+    }
+}
+routing-options {
+    static {
+        route 0.0.0.0/0 next-hop 192.168.20.1;
+        route 127.0.0.0/8 receive;
+    }
+    martians {
+        127.0.0.0/8 orlonger allow;
+    }
+}
+protocols {
+    bgp {
+        traceoptions {
+            file bgp.log size 100m;
+            flag update detail;
+        }
+    }
+    source-packet-routing {
+        compute-profile compute-sbfd {
+            no-label-stack-compression;
+        }
+    }
+    lldp {
+        port-id-subtype interface-name;
+        interface all;
+    }
+}

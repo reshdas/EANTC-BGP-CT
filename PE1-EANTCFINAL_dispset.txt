@@ -1,0 +1,289 @@
+set version 23.2I-20230312.0.0358
+set system host-name JNPR-036-MX204
+set system root-authentication encrypted-password "$6$5byGfFpq$qz3VC6AYlvNKDOM48tfo5QOAuLZkGCSJ4yPyyNjZjE8KZQKTqnDmhkSGxlleApjGBL0gubCx5G4.1JOXB6Gni."
+set system login user aelita uid 2001
+set system login user aelita class super-user
+set system login user aelita authentication encrypted-password "$6$bHlU0.Mb$hOPwz3snONLdcfBBH.aqFgUXu3TKoYaY0Xiqshq53bXXkwW0Wc7W5i5yLvusmko8fSjosJG2Pvx1VV.zB6VrR/"
+set system login user kszarkowicz uid 2000
+set system login user kszarkowicz class super-user
+set system login user kszarkowicz authentication encrypted-password "$6$DFRnkO1D$9VONDuzgbo731f87LseajyFydTOFjvv4DKUaPfgXrfQbxDb5rLYEGQEd84MYA6v34aygwzsec/Q69bHUE.WYz1"
+set system login message "\n\n******************************************************************\nThis system is used by kszarkowicz for SRv6 testing. DO NOT TOUCH!\n******************************************************************\n\n"
+set system services ssh root-login allow
+set system name-server 192.168.100.100
+set system name-server 192.168.160.100
+set system syslog file interactive-commands interactive-commands any
+set system syslog file messages any notice
+set system syslog file messages authorization info
+set system processes dhcp-service traceoptions file dhcp_logfile
+set system processes dhcp-service traceoptions file size 10m
+set system processes dhcp-service traceoptions level all
+set system processes dhcp-service traceoptions flag packet
+set system ntp server 192.168.100.132
+set logical-systems bgp-ct interfaces et-0/0/0 unit 0 vlan-id 100
+set logical-systems bgp-ct interfaces et-0/0/0 unit 0 family inet address 20.36.137.36/24
+set logical-systems bgp-ct interfaces et-0/0/0 unit 0 family iso
+set logical-systems bgp-ct interfaces et-0/0/0 unit 0 family mpls maximum-labels 16
+set logical-systems bgp-ct interfaces et-0/0/0 unit 1 vlan-id 200
+set logical-systems bgp-ct interfaces et-0/0/0 unit 1 family inet address 22.36.137.36/24
+set logical-systems bgp-ct interfaces et-0/0/0 unit 1 family iso
+set logical-systems bgp-ct interfaces et-0/0/0 unit 1 family mpls maximum-labels 16
+set logical-systems bgp-ct interfaces et-0/0/0 unit 2 vlan-id 300
+set logical-systems bgp-ct interfaces et-0/0/0 unit 2 family inet address 24.36.137.36/24
+set logical-systems bgp-ct interfaces et-0/0/0 unit 2 family iso
+set logical-systems bgp-ct interfaces et-0/0/0 unit 2 family mpls maximum-labels 16
+set logical-systems bgp-ct interfaces et-0/0/1 unit 0 vlan-id 100
+set logical-systems bgp-ct interfaces et-0/0/1 unit 0 family inet address 21.36.137.36/24
+set logical-systems bgp-ct interfaces et-0/0/1 unit 0 family mpls maximum-labels 16
+set logical-systems bgp-ct interfaces et-0/0/1 unit 1 vlan-id 200
+set logical-systems bgp-ct interfaces et-0/0/1 unit 1 family inet address 23.36.137.36/24
+set logical-systems bgp-ct interfaces et-0/0/1 unit 1 family mpls maximum-labels 16
+set logical-systems bgp-ct interfaces et-0/0/1 unit 2 vlan-id 300
+set logical-systems bgp-ct interfaces et-0/0/1 unit 2 family inet address 25.36.137.36/24
+set logical-systems bgp-ct interfaces et-0/0/1 unit 2 family mpls maximum-labels 16
+set logical-systems bgp-ct interfaces xe-0/1/4 unit 0 description "Spirent: 4"
+set logical-systems bgp-ct interfaces xe-0/1/4 unit 0 family inet address 172.17.1.1/24
+set logical-systems bgp-ct interfaces xe-0/1/4 unit 0 family inet address 172.17.2.1/24
+set logical-systems bgp-ct interfaces lo0 unit 1 family inet address 100.1.0.36/32 primary
+set logical-systems bgp-ct interfaces lo0 unit 1 family inet address 100.2.0.36/32
+set logical-systems bgp-ct interfaces lo0 unit 1 family inet address 100.3.0.36/32
+set logical-systems bgp-ct interfaces lo0 unit 1 family inet address 100.4.0.36/32
+set logical-systems bgp-ct interfaces lo0 unit 1 family inet address 100.5.0.36/32
+set logical-systems bgp-ct interfaces lo0 unit 1 family inet address 100.7.0.36/32
+set logical-systems bgp-ct interfaces lo0 unit 1 family inet address 100.9.0.36/32
+set logical-systems bgp-ct interfaces lo0 unit 1 family inet address 100.6.0.36/32
+set logical-systems bgp-ct interfaces lo0 unit 1 family iso address 49.0001.1000.0000.0036.00
+set logical-systems bgp-ct interfaces lo0 unit 1 family mpls
+set logical-systems bgp-ct protocols bgp group bgp-lu type internal
+set logical-systems bgp-ct protocols bgp group bgp-lu local-address 100.1.0.36
+set logical-systems bgp-ct protocols bgp group bgp-lu family inet labeled-unicast rib-group lu3to0
+set logical-systems bgp-ct protocols bgp group bgp-lu family inet labeled-unicast rib inet.3
+set logical-systems bgp-ct protocols bgp group bgp-lu export lu-export
+set logical-systems bgp-ct protocols bgp group bgp-lu local-as 64512
+set logical-systems bgp-ct protocols bgp group bgp-lu neighbor 100.1.0.37
+set logical-systems bgp-ct protocols bgp group bgp-ct type internal
+set logical-systems bgp-ct protocols bgp group bgp-ct local-address 100.2.0.36
+set logical-systems bgp-ct protocols bgp group bgp-ct family inet transport
+set logical-systems bgp-ct protocols bgp group bgp-ct export ct-export
+set logical-systems bgp-ct protocols bgp group bgp-ct local-as 64512
+set logical-systems bgp-ct protocols bgp group bgp-ct neighbor 100.2.0.37
+set logical-systems bgp-ct protocols bgp group to64513-SN multihop
+set logical-systems bgp-ct protocols bgp group to64513-SN local-address 100.1.0.36
+set logical-systems bgp-ct protocols bgp group to64513-SN family inet unicast
+set logical-systems bgp-ct protocols bgp group to64513-SN export service-export
+set logical-systems bgp-ct protocols bgp group to64513-SN peer-as 64513
+set logical-systems bgp-ct protocols bgp group to64513-SN local-as 64512
+set logical-systems bgp-ct protocols bgp group to64513-SN neighbor 100.0.0.34
+set logical-systems bgp-ct protocols bgp traceoptions file bgp.log
+set logical-systems bgp-ct protocols bgp traceoptions file size 100m
+set logical-systems bgp-ct protocols bgp traceoptions flag all detail
+set logical-systems bgp-ct protocols isis interface et-0/0/0.0 point-to-point
+set logical-systems bgp-ct protocols isis interface et-0/0/0.1 point-to-point
+set logical-systems bgp-ct protocols isis interface et-0/0/0.2 point-to-point
+set logical-systems bgp-ct protocols isis interface lo0.1 passive
+set logical-systems bgp-ct protocols mpls traffic-engineering
+set logical-systems bgp-ct protocols mpls no-cspf
+set logical-systems bgp-ct protocols mpls label-switched-path to-ASBR1-gold from 100.7.0.36
+set logical-systems bgp-ct protocols mpls label-switched-path to-ASBR1-gold to 100.7.0.37
+set logical-systems bgp-ct protocols mpls label-switched-path to-ASBR1-gold install 100.1.0.37/32
+set logical-systems bgp-ct protocols mpls label-switched-path to-ASBR1-gold ultimate-hop-popping
+set logical-systems bgp-ct protocols mpls label-switched-path to-ASBR1-gold no-self-ping
+set logical-systems bgp-ct protocols mpls label-switched-path to-ASBR1-gold primary to-freertr-2
+set logical-systems bgp-ct protocols mpls label-switched-path to-ASBR1-gold transport-class tc-128
+set logical-systems bgp-ct protocols mpls label-switched-path to-ASBR1-bronze from 100.9.0.36
+set logical-systems bgp-ct protocols mpls label-switched-path to-ASBR1-bronze to 100.9.0.37
+set logical-systems bgp-ct protocols mpls label-switched-path to-ASBR1-bronze install 100.1.0.37/32
+set logical-systems bgp-ct protocols mpls label-switched-path to-ASBR1-bronze ultimate-hop-popping
+set logical-systems bgp-ct protocols mpls label-switched-path to-ASBR1-bronze no-self-ping
+set logical-systems bgp-ct protocols mpls label-switched-path to-ASBR1-bronze primary to-freertr-3
+set logical-systems bgp-ct protocols mpls label-switched-path to-ASBR1-bronze transport-class tc-129
+set logical-systems bgp-ct protocols mpls label-switched-path to-ASBR1-be to 100.1.0.37
+set logical-systems bgp-ct protocols mpls label-switched-path to-ASBR1-be ultimate-hop-popping
+set logical-systems bgp-ct protocols mpls label-switched-path to-ASBR1-be no-self-ping
+set logical-systems bgp-ct protocols mpls label-switched-path to-ASBR1-be primary to-freertr-1
+set logical-systems bgp-ct protocols mpls path to-freertr-1 20.36.137.137 strict
+set logical-systems bgp-ct protocols mpls path to-freertr-2 22.36.137.137 strict
+set logical-systems bgp-ct protocols mpls path to-freertr-3 24.36.137.137 strict
+set logical-systems bgp-ct protocols mpls interface et-0/0/1.0
+set logical-systems bgp-ct protocols mpls interface et-0/0/0.0
+set logical-systems bgp-ct protocols mpls interface et-0/0/0.1
+set logical-systems bgp-ct protocols mpls interface et-0/0/0.2
+set logical-systems bgp-ct protocols mpls interface et-0/0/1.1
+set logical-systems bgp-ct protocols mpls interface et-0/0/1.2
+set logical-systems bgp-ct protocols mpls interface lo0.1
+set logical-systems bgp-ct protocols mpls static-label-switched-path push-0 ingress next-hop 20.36.137.137
+set logical-systems bgp-ct protocols mpls static-label-switched-path push-0 ingress to 100.4.0.36
+set logical-systems bgp-ct protocols mpls static-label-switched-path push-0 ingress push 0
+set logical-systems bgp-ct protocols rsvp interface et-0/0/0.0
+set logical-systems bgp-ct protocols rsvp interface et-0/0/1.0
+set logical-systems bgp-ct protocols rsvp interface et-0/0/0.1
+set logical-systems bgp-ct protocols rsvp interface et-0/0/0.2
+set logical-systems bgp-ct protocols rsvp interface et-0/0/1.1
+set logical-systems bgp-ct protocols rsvp interface et-0/0/1.2
+set logical-systems bgp-ct protocols rsvp interface lo0.1
+set logical-systems bgp-ct policy-options route-filter-list ct-pfx 100.4.0.36/32 exact label 0
+set logical-systems bgp-ct policy-options policy-statement ct-export term 1 from protocol direct
+set logical-systems bgp-ct policy-options policy-statement ct-export term 1 from rib bgp.transport.3
+set logical-systems bgp-ct policy-options policy-statement ct-export term 1 from route-filter-list ct-pfx
+set logical-systems bgp-ct policy-options policy-statement ct-export term 1 then next-hop 100.1.0.36
+set logical-systems bgp-ct policy-options policy-statement ct-export term 1 then accept
+set logical-systems bgp-ct policy-options policy-statement ct-export term def then reject
+set logical-systems bgp-ct policy-options policy-statement isis-filter term isis-rt from route-filter 100.4.0.36/32 exact
+set logical-systems bgp-ct policy-options policy-statement isis-filter term isis-rt then reject
+set logical-systems bgp-ct policy-options policy-statement isis-filter then accept
+set logical-systems bgp-ct policy-options policy-statement loopbacks term 1 from route-filter 100.1.0.36/32 exact
+set logical-systems bgp-ct policy-options policy-statement loopbacks term 1 from route-filter 100.4.0.36/32 exact
+set logical-systems bgp-ct policy-options policy-statement loopbacks term 1 then accept
+set logical-systems bgp-ct policy-options policy-statement loopbacks term def then reject
+set logical-systems bgp-ct policy-options policy-statement lu-export term 1 from protocol direct
+set logical-systems bgp-ct policy-options policy-statement lu-export term 1 from rib inet.3
+set logical-systems bgp-ct policy-options policy-statement lu-export term 1 from route-filter 100.1.0.36/32 exact
+set logical-systems bgp-ct policy-options policy-statement lu-export term 1 from route-filter 100.4.0.36/32 exact
+set logical-systems bgp-ct policy-options policy-statement lu-export term 1 then next-hop self
+set logical-systems bgp-ct policy-options policy-statement lu-export term 1 then accept
+set logical-systems bgp-ct policy-options policy-statement lu-export term def then reject
+set logical-systems bgp-ct policy-options policy-statement lu3to0-policy term 1 then community add no-ex
+set logical-systems bgp-ct policy-options policy-statement nexthops term 1 from route-filter 100.4.0.36/32 exact
+set logical-systems bgp-ct policy-options policy-statement nexthops term 1 then accept
+set logical-systems bgp-ct policy-options policy-statement nexthops term def then reject
+set logical-systems bgp-ct policy-options policy-statement service-export term 1 from protocol bgp
+set logical-systems bgp-ct policy-options policy-statement service-export term 1 from rib inet.0
+set logical-systems bgp-ct policy-options policy-statement service-export term 1 then next-hop self
+set logical-systems bgp-ct policy-options policy-statement service-export term 1 then accept
+set logical-systems bgp-ct policy-options policy-statement service-export term 2 from protocol direct
+set logical-systems bgp-ct policy-options policy-statement service-export term 2 from rib inet.0
+set logical-systems bgp-ct policy-options policy-statement service-export term 2 from route-filter 100.3.0.36/32 exact
+set logical-systems bgp-ct policy-options policy-statement service-export term 2 from route-filter 172.17.1.0/24 exact
+set logical-systems bgp-ct policy-options policy-statement service-export term 2 then community add gold
+set logical-systems bgp-ct policy-options policy-statement service-export term 2 then next-hop 100.4.0.36
+set logical-systems bgp-ct policy-options policy-statement service-export term 2 then accept
+set logical-systems bgp-ct policy-options policy-statement service-export term 3 from protocol direct
+set logical-systems bgp-ct policy-options policy-statement service-export term 3 from rib inet.0
+set logical-systems bgp-ct policy-options policy-statement service-export term 3 from route-filter 100.5.0.36/32 exact
+set logical-systems bgp-ct policy-options policy-statement service-export term 3 from route-filter 172.17.2.0/24 exact
+set logical-systems bgp-ct policy-options policy-statement service-export term 3 then community add bronze
+set logical-systems bgp-ct policy-options policy-statement service-export term 3 then next-hop 100.4.0.36
+set logical-systems bgp-ct policy-options policy-statement service-export term 3 then accept
+set logical-systems bgp-ct policy-options policy-statement service-export term 4 from protocol direct
+set logical-systems bgp-ct policy-options policy-statement service-export term 4 from rib inet.0
+set logical-systems bgp-ct policy-options policy-statement service-export term 4 from route-filter 100.2.0.36/32 exact
+set logical-systems bgp-ct policy-options policy-statement service-export term 4 then next-hop 100.4.0.36
+set logical-systems bgp-ct policy-options policy-statement service-export term 4 then accept
+set logical-systems bgp-ct policy-options policy-statement service-export term def then reject
+set logical-systems bgp-ct policy-options community bronze members color:0:129
+set logical-systems bgp-ct policy-options community gold members color:0:128
+set logical-systems bgp-ct policy-options community no-ex members no-export
+set logical-systems bgp-ct routing-options route-distinguisher-id 100.0.0.36
+set logical-systems bgp-ct routing-options interface-routes rib-group inet inet0to3
+set logical-systems bgp-ct routing-options router-id 100.1.0.36
+set logical-systems bgp-ct routing-options static rib-group tc-ribs
+set logical-systems bgp-ct routing-options static route 100.7.0.37/32 next-hop 22.36.137.137
+set logical-systems bgp-ct routing-options static route 100.9.0.37/32 next-hop 24.36.137.137
+set logical-systems bgp-ct routing-options rib-groups lu3to0 import-rib inet.3
+set logical-systems bgp-ct routing-options rib-groups lu3to0 import-rib inet.0
+set logical-systems bgp-ct routing-options rib-groups lu3to0 import-policy lu3to0-policy
+set logical-systems bgp-ct routing-options rib-groups inet0to3 import-rib inet.0
+set logical-systems bgp-ct routing-options rib-groups inet0to3 import-rib inet.3
+set logical-systems bgp-ct routing-options rib-groups inet0to3 import-policy loopbacks
+set logical-systems bgp-ct routing-options rib-groups tc-ribs import-rib inet.0
+set logical-systems bgp-ct routing-options rib-groups tc-ribs import-rib junos-rti-tc-128.inet.3
+set logical-systems bgp-ct routing-options rib-groups tc-ribs import-rib junos-rti-tc-129.inet.3
+set logical-systems bgp-ct routing-options rib-groups tc-ribs import-policy nexthops
+set logical-systems bgp-ct routing-options transport-class auto-create
+set logical-systems bgp-ct routing-options transport-class name tc-128 color 128
+set logical-systems bgp-ct routing-options transport-class name tc-128 tunnel-egress end-point 100.4.0.36
+set logical-systems bgp-ct routing-options transport-class name tc-129 color 129
+set logical-systems bgp-ct routing-options transport-class name tc-129 tunnel-egress end-point 100.4.0.36
+set chassis dump-on-panic
+set chassis fpc 0 pic 0 port 0 speed 100g
+set chassis fpc 0 pic 0 port 1 speed 40g
+set chassis fpc 0 pic 0 port 2 speed 10g
+set chassis fpc 0 pic 0 port 3 speed 100g
+set chassis fpc 0 pic 1 port 0 speed 10g
+set chassis fpc 0 pic 1 port 1 speed 10g
+set chassis fpc 0 pic 1 port 2 speed 10g
+set chassis fpc 0 pic 1 port 3 speed 10g
+set chassis fpc 0 pic 1 port 4 speed 10g
+set chassis fpc 0 pic 1 port 5 speed 10g
+set chassis fpc 0 pic 1 port 6 speed 10g
+set chassis fpc 0 pic 1 port 7 speed 10g
+set chassis network-services enhanced-ip
+set services network-slicing slice SL-A
+set services network-slicing slice SL-B
+set interfaces et-0/0/0 hierarchical-scheduler
+set interfaces et-0/0/0 vlan-tagging
+set interfaces et-0/0/1 vlan-tagging
+set interfaces xe-0/1/1 description JNPR-36:xe-0/1/1
+set interfaces xe-0/1/1 traps
+set interfaces xe-0/1/1 hold-time up 2000
+set interfaces xe-0/1/1 hold-time down 0
+set interfaces xe-0/1/1 damping half-life 30
+set interfaces xe-0/1/1 damping max-suppress 600
+set interfaces xe-0/1/1 damping reuse 250
+set interfaces xe-0/1/1 damping suppress 2000
+set interfaces xe-0/1/1 damping enable
+set interfaces xe-0/1/1 optics-options alarm low-light-alarm link-down
+set interfaces xe-0/1/1 optics-options warning low-light-warning syslog
+set interfaces xe-0/1/1 unit 0 traps
+set interfaces xe-0/1/1 unit 0 family iso
+set interfaces xe-0/1/1 unit 0 family inet6 address 2001:0:30:36::36/64
+set interfaces xe-0/1/4 description "Spirent: 4"
+set interfaces fxp0 unit 0 family inet address 192.168.20.36/23
+set interfaces lo0 unit 0 family inet address 100.0.0.36/32
+set interfaces lo0 unit 0 family iso address 49.0000.1000.0000.0036.00
+set interfaces lo0 unit 0 family inet6 address 2002::36/128
+set policy-options policy-statement PS-LOAD-BALANCE then load-balance per-packet
+set policy-options community bronze members color:0:129
+set policy-options community gold members color:0:128
+set class-of-service traffic-control-profiles TCP-10G shaping-rate 10g
+set class-of-service traffic-control-profiles TCP-A shaping-rate 10m
+set class-of-service traffic-control-profiles TCP-B shaping-rate 20m
+set class-of-service interfaces et-0/0/0 output-traffic-control-profile TCP-10G
+set class-of-service interfaces et-0/0/0 slice SL-A output-traffic-control-profile TCP-B
+set routing-options source-packet-routing srv6 locator SL-000 fcba:0:0:36::/64
+set routing-options source-packet-routing srv6 locator SL-000 block-length 48
+set routing-options source-packet-routing srv6 locator SL-000 function-length 16
+set routing-options route-distinguisher-id 100.0.0.36
+set routing-options resolution preserve-nexthop-hierarchy
+set routing-options router-id 100.0.0.36
+set routing-options autonomous-system 65000
+set routing-options ipv6-router-id 2002::36
+set routing-options static route 0.0.0.0/0 next-hop 192.168.20.1
+set routing-options forwarding-table export PS-LOAD-BALANCE
+set protocols router-advertisement interface fxp0.0 managed-configuration
+set protocols esis disable
+set protocols isis interface xe-0/1/1.0 level 1 disable
+set protocols isis interface xe-0/1/1.0 level 2 post-convergence-lfa node-protection cost 16777214
+set protocols isis interface xe-0/1/1.0 delay-measurement
+set protocols isis interface xe-0/1/1.0 hello-padding strict
+set protocols isis interface xe-0/1/1.0 lsp-interval 10
+set protocols isis interface xe-0/1/1.0 point-to-point
+set protocols isis interface xe-0/1/1.0 family inet6 bfd-liveness-detection minimum-interval 1000
+set protocols isis interface xe-0/1/1.0 family inet6 bfd-liveness-detection multiplier 3
+set protocols isis interface xe-0/1/1.0 family inet6 bfd-liveness-detection no-adaptation
+set protocols isis interface lo0.0 passive
+set protocols isis source-packet-routing no-strict-spf
+set protocols isis source-packet-routing srv6 locator SL-000 end-sid fcba:0:0:36:: flavor psp
+set protocols isis source-packet-routing srv6 locator SL-000 end-sid fcba:0:0:36:: flavor usp
+set protocols isis source-packet-routing srv6 locator SL-000 end-sid fcba:0:0:36:: flavor usd
+set protocols isis level 1 disable
+set protocols isis level 2 purge-originator empty
+set protocols isis level 2 wide-metrics-only
+set protocols isis spf-options delay 50
+set protocols isis spf-options holddown 2000
+set protocols isis spf-options rapid-runs 5
+set protocols isis traceoptions flag error detail
+set protocols isis traceoptions flag state detail
+set protocols isis traceoptions file isis
+set protocols isis traceoptions file size 5m
+set protocols isis traceoptions file files 10
+set protocols isis traceoptions file world-readable
+set protocols isis backup-spf-options use-post-convergence-lfa maximum-srv6-sids 6
+set protocols isis backup-spf-options use-post-convergence-lfa maximum-backup-paths 2
+set protocols isis backup-spf-options use-source-packet-routing
+set protocols isis lsp-lifetime 65535
+set protocols isis no-ipv4-routing
+set protocols isis suppress-attached-bit
+set protocols isis overload timeout 300
+set protocols isis overload advertise-high-metrics
+set protocols lldp interface all disable
+set protocols lldp interface xe-0/1/1
